@@ -1,0 +1,15 @@
+@import "./_variables";
+@import "./sass/_layout";
+@import "./_overrides";
+
+.p-toast.p-toast-top-right {
+  z-index: 1000;
+  top: 7rem;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 8rem;
+  font-size: 20px;
+}

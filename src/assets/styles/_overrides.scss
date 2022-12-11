@@ -1,0 +1,624 @@
+// Suggested location to add your overrides so that migration would be easy by just updating the SASS folder in the future
+:root {
+  --primary-color: #7C73E6;
+  --primary-color-dark: #263159;
+  --focus-ring: 0 0 0 1px #ff9922;
+}
+
+.p-autocomplete .p-autocomplete-multiple-container:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-year:enabled:hover,
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-month:enabled:hover {
+  color: var(--primary-color);
+}
+
+.p-cascadeselect:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+}
+
+.p-input-filled .p-checkbox .p-checkbox-box.p-highlight {
+  background: var(--primary-color);
+}
+
+.p-input-filled
+  .p-checkbox:not(.p-checkbox-disabled)
+  .p-checkbox-box.p-highlight:hover {
+  background: var(--primary-color);
+}
+
+.p-chips .p-chips-multiple-container:not(.p-disabled).p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+.p-editor-container .ql-snow.ql-toolbar button.ql-active,
+.p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+.p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected {
+  color: var(--primary-color);
+}
+.p-editor-container .ql-snow.ql-toolbar button.ql-active .ql-stroke,
+.p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke {
+  stroke: var(--primary-color);
+}
+.p-editor-container .ql-snow.ql-toolbar button.ql-active .ql-fill,
+.p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill {
+  fill: var(--primary-color);
+}
+.p-editor-container .ql-snow.ql-toolbar button.ql-active .ql-picker-label,
+.p-editor-container
+  .ql-snow.ql-toolbar
+  .ql-picker-label.ql-active
+  .ql-picker-label,
+.p-editor-container
+  .ql-snow.ql-toolbar
+  .ql-picker-item.ql-selected
+  .ql-picker-label {
+  color: var(--primary-color);
+}
+
+.p-inputswitch.p-focus .p-inputswitch-slider {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+  background: var(--primary-color);
+}
+
+.p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover
+  .p-inputswitch-slider {
+  background: var(--primary-color-dark);
+}
+
+.p-inputtext:enabled:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+.p-listbox .p-listbox-list .p-listbox-item:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+
+.p-multiselect:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+.p-multiselect-panel .p-multiselect-header .p-multiselect-close:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+
+.p-radiobutton .p-radiobutton-box:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+
+.p-radiobutton .p-radiobutton-box.p-highlight,
+.p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+}
+//.p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+//  border-color: var(--primary-color);
+//  background: var(--primary-color);
+//}
+.p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight,
+.p-input-filled
+  .p-radiobutton
+  .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+  background: var(--primary-color);
+}
+//.p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+//  background: var(--primary-color);
+//}
+
+.p-rating .p-rating-icon:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+
+.p-rating .p-rating-icon.pi-star-fill,
+.p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
+  color: var(--primary-color);
+}
+//.p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon:hover {
+//  color: var(--primary-color);
+//}
+
+.p-selectbutton .p-button.p-highlight {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.p-selectbutton .p-button.p-highlight:hover {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+
+.p-slider .p-slider-handle {
+  border: 2px solid var(--primary-color);
+}
+
+.p-slider .p-slider-handle:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-slider .p-slider-range {
+  background: var(--primary-color);
+}
+.p-slider:not(.p-disabled) .p-slider-handle:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.p-treeselect:not(.p-disabled).p-focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+  border-color: var(--primary-color);
+}
+.p-togglebutton.p-button.p-highlight {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.p-togglebutton.p-button.p-highlight:hover {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.p-button {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.p-button:enabled:hover {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.p-button:enabled:active {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+
+.p-button.p-button-outlined {
+  color: var(--primary-color);
+}
+.p-button.p-button-outlined:enabled:hover {
+  color: var(--primary-color);
+}
+.p-button.p-button-outlined:enabled:active {
+  color: var(--primary-color);
+}
+.p-button.p-button-text {
+  color: var(--primary-color);
+}
+.p-button.p-button-text:enabled:hover {
+  color: var(--primary-color);
+}
+.p-button.p-button-text:enabled:active {
+  color: var(--primary-color);
+}
+.p-button:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-button .p-badge {
+  color: var(--primary-color);
+}
+.p-button.p-button-link {
+  color: var(--primary-color);
+}
+.p-button.p-button-link:enabled:hover {
+  color: var(--primary-color);
+}
+.p-button.p-button-link:enabled:focus {
+  box-shadow: 0 0 0 0.2rem var(--focus-ring);
+}
+.p-button.p-button-link:enabled:active {
+  color: var(--primary-color);
+}
+.p-splitbutton.p-button-outlined > .p-button {
+  color: var(--primary-color);
+}
+.p-splitbutton.p-button-outlined > .p-button:enabled:hover,
+.p-splitbutton.p-button-outlined
+  > .p-button:not(button):not(a):not(.p-disabled):hover {
+  color: var(--primary-color);
+}
+.p-splitbutton.p-button-outlined > .p-button:enabled:active,
+.p-splitbutton.p-button-outlined
+  > .p-button:not(button):not(a):not(.p-disabled):active {
+  color: var(--primary-color);
+}
+.p-splitbutton.p-button-text > .p-button {
+  color: var(--primary-color);
+}
+.p-splitbutton.p-button-text > .p-button:enabled:hover,
+.p-splitbutton.p-button-text
+  > .p-button:not(button):not(a):not(.p-disabled):hover {
+  color: var(--primary-color);
+}
+.p-splitbutton.p-button-text > .p-button:enabled:active,
+.p-splitbutton.p-button-text
+  > .p-button:not(button):not(a):not(.p-disabled):active {
+  color: var(--primary-color);
+}
+.p-carousel .p-carousel-content .p-carousel-prev:focus,
+.p-carousel .p-carousel-content .p-carousel-next:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-datatable .p-sortable-column.p-highlight {
+  background: #fafafa;
+  color: var(--primary-color);
+}
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: var(--primary-color);
+}
+.p-datatable .p-sortable-column.p-highlight:hover {
+  background: #f4f4f5;
+  color: var(--primary-color);
+}
+.p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
+  color: var(--primary-color);
+}
+.p-datatable .p-sortable-column:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-datatable .p-datatable-tbody > tr > td .p-row-toggler:focus,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-init:focus,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-save:focus,
+.p-datatable .p-datatable-tbody > tr > td .p-row-editor-cancel:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-datatable .p-datatable-tbody > tr:focus {
+  outline: 0.15rem solid var(--focus-ring);
+}
+.p-datatable .p-column-resizer-helper {
+  background: var(--primary-color);
+}
+.p-column-filter-menu-button:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-column-filter-clear-button:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-column-filter-overlay
+  .p-column-filter-row-items
+  .p-column-filter-row-item:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.fc.fc-unthemed .fc-view-container .fc-event {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.fc.fc-unthemed .fc-toolbar .fc-button {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.fc.fc-unthemed .fc-toolbar .fc-button:enabled:hover {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.fc.fc-unthemed .fc-toolbar .fc-button:enabled:active {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.fc.fc-unthemed .fc-toolbar .fc-button:enabled:active:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.fc.fc-unthemed .fc-toolbar .fc-button:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.fc.fc-unthemed .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active,
+.fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active,
+.fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.fc.fc-unthemed
+  .fc-toolbar
+  .fc-button.fc-dayGridMonth-button.fc-button-active:hover,
+.fc.fc-unthemed
+  .fc-toolbar
+  .fc-button.fc-timeGridWeek-button.fc-button-active:hover,
+.fc.fc-unthemed
+  .fc-toolbar
+  .fc-button.fc-timeGridDay-button.fc-button-active:hover {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.fc.fc-unthemed .fc-toolbar .fc-button.fc-dayGridMonth-button:focus,
+.fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridWeek-button:focus,
+.fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridDay-button:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.fc.fc-theme-standard
+  .fc-view-harness
+  .fc-popover
+  .fc-popover-header
+  .fc-popover-close:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.fc.fc-theme-standard
+  .fc-view-harness
+  .fc-event.fc-daygrid-dot-event
+  .fc-daygrid-event-dot {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.fc.fc-theme-standard .fc-toolbar .fc-button {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.fc.fc-theme-standard .fc-toolbar .fc-button:enabled:hover {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.fc.fc-theme-standard .fc-toolbar .fc-button:enabled:active {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.fc.fc-theme-standard .fc-toolbar .fc-button:enabled:active:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.fc.fc-theme-standard .fc-toolbar .fc-button:disabled {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+.fc.fc-theme-standard .fc-toolbar .fc-button:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-dayGridMonth-button.fc-button-active,
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-timeGridWeek-button.fc-button-active,
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-timeGridDay-button.fc-button-active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-dayGridMonth-button.fc-button-active:hover,
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-timeGridWeek-button.fc-button-active:hover,
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-timeGridDay-button.fc-button-active:hover {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-dayGridMonth-button:not(:disabled):focus,
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-timeGridWeek-button:not(:disabled):focus,
+.fc.fc-theme-standard
+  .fc-toolbar
+  .fc-button.fc-timeGridDay-button:not(:disabled):focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-orderlist .p-orderlist-list .p-orderlist-item:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-organizationchart .p-organizationchart-node-content .p-node-toggler:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-picklist .p-picklist-list .p-picklist-item:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-timeline .p-timeline-event-marker {
+  border: 2px solid var(--primary-color);
+}
+.p-tree
+  .p-tree-container
+  .p-treenode
+  .p-treenode-content
+  .p-tree-toggler:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-tree .p-tree-container .p-treenode .p-treenode-content:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-treetable .p-sortable-column {
+  outline-color: var(--focus-ring);
+}
+.p-treetable .p-sortable-column.p-highlight {
+  color: var(--primary-color);
+}
+.p-treetable .p-sortable-column.p-highlight .p-sortable-column-icon {
+  color: var(--primary-color);
+}
+.p-treetable .p-treetable-tbody > tr > td .p-treetable-toggler:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-treetable .p-treetable-tbody > tr:focus {
+  outline: 0.15rem solid var(--focus-ring);
+}
+.p-treetable .p-column-resizer-helper {
+  background: var(--primary-color);
+}
+.p-accordion
+  .p-accordion-header:not(.p-disabled)
+  .p-accordion-header-link:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-fieldset.p-fieldset-toggleable .p-fieldset-legend a:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-panel .p-panel-header .p-panel-header-icon:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: inset 0 0 0 1px var(--focus-ring);
+}
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.p-tabview .p-tabview-nav-btn.p-link {
+  color: var(--primary-color);
+}
+.p-tabview .p-tabview-nav-btn.p-link:focus {
+  box-shadow: inset 0 0 0 1px var(--focus-ring);
+}
+.p-dialog .p-dialog-header .p-dialog-header-icon:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-overlaypanel .p-overlaypanel-close {
+  background: var(--primary-color);
+}
+.p-overlaypanel .p-overlaypanel-close:enabled:hover {
+  background: var(--primary-color-dark);
+}
+.p-sidebar .p-sidebar-header .p-sidebar-close:focus,
+.p-sidebar .p-sidebar-header .p-sidebar-icon:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-fileupload .p-fileupload-buttonbar .p-button.p-fileupload-choose.p-focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-fileupload-choose:not(.p-disabled):hover {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.p-fileupload-choose:not(.p-disabled):active {
+  background: var(--primary-color-dark);
+  border-color: var(--primary-color-dark);
+}
+.p-breadcrumb ul li .p-menuitem-link:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-contextmenu .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-megamenu .p-megamenu-root-list > .p-menuitem > .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-megamenu .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-menu .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-menubar .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-menubar .p-menubar-button:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-panelmenu .p-panelmenu-header > a:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-steps .p-steps-item .p-menuitem-link:not(.p-disabled):focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-tabmenu
+  .p-tabmenu-nav
+  .p-tabmenuitem
+  .p-menuitem-link:not(.p-disabled):focus {
+  box-shadow: inset 0 0 0 1px var(--focus-ring);
+}
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.p-tieredmenu .p-menuitem-link:focus {
+  box-shadow: inset 0 0 0 0.15rem var(--focus-ring);
+}
+.p-message .p-message-close:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-toast .p-toast-message .p-toast-icon-close:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-galleria
+  .p-galleria-thumbnail-container
+  .p-galleria-thumbnail-item-content:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+
+.p-chip .p-chip-remove-icon:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-inplace .p-inplace-display:focus {
+  box-shadow: 0 0 0 1px var(--focus-ring);
+}
+.p-badge,
+.p-tag,
+.p-progressbar .p-progressbar-value {
+  background: var(--primary-color);
+}
+
+.p-inputswitch.p-focus .p-inputswitch-slider {
+  box-shadow: 0 0 0 2px var(--focus-ring);
+}
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  border-color: var(--primary-color);
+}
+
+.p-button:focus,
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus,
+.p-radiobutton:not(.p-radiobutton-disabled) .p-radiobutton-box.p-focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--focus-ring),
+    0 1px 2px 0 rgba(0, 0, 0, 0);
+}
+
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button,
+.p-galleria .p-galleria-indicators .p-galleria-indicator.p-highlight button {
+  background-color: var(--primary-color);
+}
+
+.p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
+  box-shadow: inset 0 2px 0 0 var(--primary-color);
+}
+.p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
+  box-shadow: inset 0 -2px 0 0 var(--primary-color);
+}
