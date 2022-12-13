@@ -1,8 +1,12 @@
 <template>
 	<div class="layout-menu-container">
-		<!-- <NuxtLink to="/" class="layout-sidebar-logo">
-      <img alt="Bidyava Logo" :src="'/images/logos/Bidyava-Logo.svg'" />
-    </NuxtLink> -->
+		<NuxtLink to="/" class="layout-sidebar-logo">
+			<img
+				alt="House Rent Management System"
+				:src="'/images/logos/House-Rent-Management-System.png'"
+			/>
+		</NuxtLink>
+
 		<AppSubmenu
 			:items="model"
 			class="layout-menu"

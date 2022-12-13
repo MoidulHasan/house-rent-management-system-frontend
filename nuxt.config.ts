@@ -10,10 +10,9 @@ export default defineNuxtConfig({
 		public: resolvePath("./public/"),
 		constants: resolvePath("./constants/"),
 	},
-	plugins: [{ src: "~/plugins/mathlive.client.js" }],
 
 	build: {
-		transpile: ["primevue", "vue-mathlive"],
+		transpile: ["primevue"],
 	},
 
 	css: [
@@ -24,7 +23,6 @@ export default defineNuxtConfig({
 		"prismjs/themes/prism-coy.css",
 		"~/assets/styles/layout.scss",
 		"~/assets/demo/flags/flags.css",
-		"mathlive/dist/mathlive-static.css",
 	],
 
 	dir: {

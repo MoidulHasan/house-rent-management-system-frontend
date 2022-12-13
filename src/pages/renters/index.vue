@@ -1,6 +1,11 @@
 <template>
 	<div>
 		<PageBreadcrumb :bread-crumb-item="breadCrumbItems" :start="true" />
+		<Toolbar
+			:title="'Renters'"
+			:add-button-label="'Add Renters'"
+			:create-page-url="'/renters/create'"
+		/>
 	</div>
 </template>
 

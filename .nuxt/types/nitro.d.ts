@@ -2,22 +2,6 @@
 declare module 'nitropack' {
   type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T
   interface InternalApi {
-    '/api/subject/get-all': Awaited<ReturnType<typeof import('../../src/server/api/subject/get-all').default>>
-    '/api/sessions': Awaited<ReturnType<typeof import('../../src/server/api/sessions/index.get').default>>
-    '/api/question': Awaited<ReturnType<typeof import('../../src/server/api/question/index').default>>
-    '/api/question/edit': Awaited<ReturnType<typeof import('../../src/server/api/question/edit/index').default>>
-    '/api/question/delete': Awaited<ReturnType<typeof import('../../src/server/api/question/delete/index').default>>
-    '/api/question/create': Awaited<ReturnType<typeof import('../../src/server/api/question/create/index').default>>
-    '/api/previous-questions/add-to-mcq': Awaited<ReturnType<typeof import('../../src/server/api/previous-questions/add-to-mcq').default>>
-    '/api/model-tests': Awaited<ReturnType<typeof import('../../src/server/api/model-tests/index.get').default>>
-    '/api/model-tests/:id': Awaited<ReturnType<typeof import('../../src/server/api/model-tests/[id].get').default>>
-    '/api/mcq-set/get-all': Awaited<ReturnType<typeof import('../../src/server/api/mcq-set/get-all').default>>
-    '/api/institute/get-all': Awaited<ReturnType<typeof import('../../src/server/api/institute/get-all').default>>
-    '/api/image/upload': Awaited<ReturnType<typeof import('../../src/server/api/image/upload/index').default>>
-    '/api/image/delete': Awaited<ReturnType<typeof import('../../src/server/api/image/delete').default>>
-    '/api/curriculum/get-all': Awaited<ReturnType<typeof import('../../src/server/api/curriculum/get-all').default>>
-    '/api/auth/logout': Awaited<ReturnType<typeof import('../../src/server/api/auth/logout').default>>
-    '/api/auth/login': Awaited<ReturnType<typeof import('../../src/server/api/auth/login').default>>
     '/__nuxt_error': Awaited<ReturnType<typeof import('../../node_modules/nuxt/dist/core/runtime/nitro/renderer').default>>
   }
 }

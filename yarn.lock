@@ -4225,11 +4225,6 @@ make-dir@^3.1.0, make-dir@~3.1.0:
   dependencies:
     semver "^6.0.0"
 
-mathlive@^0.84.0:
-  version "0.84.0"
-  resolved "https://registry.yarnpkg.com/mathlive/-/mathlive-0.84.0.tgz#5d3120e0ccdcf8cdbb006701b9e1bddd44d2791b"
-  integrity sha512-XRVE3fWTEytNkcNNzUgIfiL0eyLXsif4nVpLHa+PGXICq6PK949IkMh7ZCR4LmzT1dtTA4mL6S4gcbeVvlohow==
-
 mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50"

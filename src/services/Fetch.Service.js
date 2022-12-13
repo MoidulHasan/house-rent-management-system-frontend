@@ -3,8 +3,6 @@ import { useAuthStore } from "../stores/auth.store";
 export default class FetchService {
   async postData(url = "", data = {}) {
 
-    console.log(url)
-
     const AuthStore = useAuthStore();
 
     const response = await fetch(url, {

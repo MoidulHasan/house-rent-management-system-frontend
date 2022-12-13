@@ -22,9 +22,12 @@
 				</svg>
 			</Button>
 
-			<!-- <NuxtLink v-show="menuClick" to="/" class="layout-topbar-logo">
-        <img alt="Bidyava Logo" :src="'/images/logos/Bidyava-Logo.svg'" />
-      </NuxtLink> -->
+			<NuxtLink v-show="menuClick" to="/" class="layout-topbar-logo">
+				<img
+					alt="House Rent Management System"
+					:src="'/images/logos/House-Rent-Management-System.png'"
+				/>
+			</NuxtLink>
 
 			<button
 				:styleClass="{
