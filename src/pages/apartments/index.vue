@@ -1,22 +1,6 @@
 <template>
 	<div>
 		<PageBreadcrumb :bread-crumb-item="breadCrumbItems" :start="true" />
-		<!-- <Toolbar
-			:title="'Appartments'"
-			:add-button-label="'Add Appartments'"
-			:create-page-url="'/apartments/create'"
-		/>
-
-		<DataTable :value="AppartmentData" class="mt-5">
-			<Column field="Unit_Name" header="Unit Name" />
-			<Column field="Category" header="Category" />
-			<Column field="Status" header="Status" />
-			<Column field="Rent_Charge" header="Rent_Charge" />
-
-			<Column slot>
-			
-			</Column>
-		</DataTable> -->
 
 		<Toolbar class="mb-4">
 			<template #start>
@@ -84,6 +68,12 @@
 			/>
 
 			<Column
+				field="Building_Name"
+				header="Building Name"
+				style="min-width: 16rem"
+			/>
+
+			<Column
 				field="Unit_Name"
 				header="Unit Name"
 				style="min-width: 16rem"
@@ -139,14 +129,14 @@
 			</Column>
 		</DataTable>
 
-		<AddApartment
+		<ApartmentAdd
 			:show-dialog="showAddDialog"
 			@hide-dialog="hideDialogAdd"
 			@apartment-added="apartmentAdded"
 		/>
 
 		<Dialog
-			v-model:visible="deleteDialog"
+			:visible="deleteDialog"
 			:style="{ width: '450px' }"
 			header="Confirm"
 			:modal="true"

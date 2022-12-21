@@ -9,6 +9,11 @@ export const useMenus = () => {
 					to: "/",
 				},
 				{
+					label: "Building",
+					icon: "pi pi-building",
+					to: "/building",
+				},
+				{
 					label: "Apartments",
 					icon: "pi pi-building",
 					to: "/apartments",
