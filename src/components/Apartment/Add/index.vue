@@ -186,6 +186,7 @@
 	// define props
 	const props = defineProps<{
 		showDialog: boolean;
+		buildingName?: null | string;
 	}>();
 
 	// define events
@@ -203,7 +204,7 @@
 		Descriptions: null,
 		Building_Name: null,
 		Category: null,
-		Status: null,
+		Status: "Unoccupied",
 		Rent_Charge: null,
 		Number_of_room: null,
 	});
@@ -273,7 +274,18 @@
 	};
 
 	onMounted(() => {
-		fetchBuldingNameOptions();
+		if (props.buildingName) {
+			buildingNames.value = [
+				{
+					label: props.buildingName,
+					value: props.buildingName,
+				},
+			];
+
+			apartmentData.value.Building_Name = props.buildingName;
+		} else {
+			fetchBuldingNameOptions();
+		}
 	});
 </script>
 
