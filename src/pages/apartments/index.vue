@@ -122,8 +122,8 @@
 					/>
 					<Button
 						icon="pi pi-trash"
-						class="p-button-rounded p-button-warning"
-						@click="confirmDelete(slotProps.data)"
+						class="p-button-rounded p-button-danger text-white"
+						@click="deleteRow(slotProps.data)"
 					/>
 				</template>
 			</Column>
@@ -135,36 +135,12 @@
 			@apartment-added="apartmentAdded"
 		/>
 
-		<Dialog
-			:visible="deleteDialog"
-			:style="{ width: '450px' }"
-			header="Confirm"
-			:modal="true"
-		>
-			<div class="confirmation-content">
-				<i
-					class="pi pi-exclamation-triangle mr-3"
-					style="font-size: 2rem"
-				/>
-				<span v-if="apartmentToDelete">
-					Are you sure you want to delete the selected Apartment?
-				</span>
-			</div>
-			<template #footer>
-				<Button
-					label="No"
-					icon="pi pi-times"
-					class="p-button-text"
-					@click="deleteDialog = false"
-				/>
-				<Button
-					label="Yes"
-					icon="pi pi-check"
-					class="p-button-text"
-					@click="deleteSelectedApartment"
-				/>
-			</template>
-		</Dialog>
+		<ApartmentDeleteRow
+			:apartment-id="rowIdToDelete"
+			:show-dialog="deleteRowDialog"
+			@on-deleted="onDeleted"
+			@on-hide="onHide"
+		/>
 	</div>
 </template>
 
@@ -199,8 +175,11 @@
 		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 	});
 	const showAddDialog = ref(false);
-	const apartmentToDelete = ref(null);
 	const deleteDialog = ref(false);
+
+	// delete single row
+	const rowIdToDelete = ref(null);
+	const deleteRowDialog = ref(false);
 
 	// methods
 	onMounted(() => {
@@ -231,17 +210,18 @@
 		fetchData();
 	};
 
-	const confirmDelete = (apartment) => {
-		apartmentToDelete.value = apartment;
+	const deleteRow = (apartment) => {
+		rowIdToDelete.value = apartment._id;
+		deleteRowDialog.value = true;
+	};
+
+	const confirmDeleteSelected = (event) => {
+		console.log(selectedApartments.value);
 		deleteDialog.value = true;
 	};
 
-	const deleteSelectedApartment = async () => {
-		const response = await Appartment.Delete(apartmentToDelete.value._id);
-
-		deleteDialog.value = false;
-
-		if (response.status === "success") {
+	const onDeleted = (status) => {
+		if (status) {
 			toast.add({
 				severity: "success",
 				summary: "Success",
@@ -258,6 +238,17 @@
 				life: 3000,
 			});
 		}
+	};
+
+	const onHide = () => {
+		deleteRowDialog.value = false;
+
+		toast.add({
+			severity: "info",
+			summary: "Canceled",
+			detail: "Apartment Delete Canceled",
+			life: 3000,
+		});
 	};
 </script>
 
