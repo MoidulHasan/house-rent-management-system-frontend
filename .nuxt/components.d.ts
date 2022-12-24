@@ -3,6 +3,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     'AddBuilding': typeof import("../src/components/AddBuilding/index.vue")['default']
     'ApartmentAdd': typeof import("../src/components/Apartment/Add/index.vue")['default']
+    'ApartmentDeleteRow': typeof import("../src/components/Apartment/Delete/Row.vue")['default']
     'CommonBlockViewer': typeof import("../src/components/Common/BlockViewer.vue")['default']
     'PageBreadcrumbBread': typeof import("../src/components/PageBreadcrumb/Bread.vue")['default']
     'PageBreadcrumb': typeof import("../src/components/PageBreadcrumb/index.vue")['default']
@@ -24,6 +25,7 @@ declare module '@vue/runtime-core' {
     'NuxtLoadingIndicator': typeof import("../node_modules/nuxt/dist/app/components/nuxt-loading-indicator")['default']
     'LazyAddBuilding': typeof import("../src/components/AddBuilding/index.vue")['default']
     'LazyApartmentAdd': typeof import("../src/components/Apartment/Add/index.vue")['default']
+    'LazyApartmentDeleteRow': typeof import("../src/components/Apartment/Delete/Row.vue")['default']
     'LazyCommonBlockViewer': typeof import("../src/components/Common/BlockViewer.vue")['default']
     'LazyPageBreadcrumbBread': typeof import("../src/components/PageBreadcrumb/Bread.vue")['default']
     'LazyPageBreadcrumb': typeof import("../src/components/PageBreadcrumb/index.vue")['default']
@@ -48,6 +50,7 @@ declare module '@vue/runtime-core' {
 
 export const AddBuilding: typeof import("../src/components/AddBuilding/index.vue")['default']
 export const ApartmentAdd: typeof import("../src/components/Apartment/Add/index.vue")['default']
+export const ApartmentDeleteRow: typeof import("../src/components/Apartment/Delete/Row.vue")['default']
 export const CommonBlockViewer: typeof import("../src/components/Common/BlockViewer.vue")['default']
 export const PageBreadcrumbBread: typeof import("../src/components/PageBreadcrumb/Bread.vue")['default']
 export const PageBreadcrumb: typeof import("../src/components/PageBreadcrumb/index.vue")['default']
@@ -69,6 +72,7 @@ export const NuxtLink: typeof import("../node_modules/nuxt/dist/app/components/n
 export const NuxtLoadingIndicator: typeof import("../node_modules/nuxt/dist/app/components/nuxt-loading-indicator")['default']
 export const LazyAddBuilding: typeof import("../src/components/AddBuilding/index.vue")['default']
 export const LazyApartmentAdd: typeof import("../src/components/Apartment/Add/index.vue")['default']
+export const LazyApartmentDeleteRow: typeof import("../src/components/Apartment/Delete/Row.vue")['default']
 export const LazyCommonBlockViewer: typeof import("../src/components/Common/BlockViewer.vue")['default']
 export const LazyPageBreadcrumbBread: typeof import("../src/components/PageBreadcrumb/Bread.vue")['default']
 export const LazyPageBreadcrumb: typeof import("../src/components/PageBreadcrumb/index.vue")['default']

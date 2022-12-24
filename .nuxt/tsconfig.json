@@ -46,8 +46,8 @@
       "assets/*": [
         "src/assets/*"
       ],
-      "/home/antukhan/Work/personal-project/house-rent-management-system/frontend/public": [
-        "src/home/antukhan/Work/personal-project/house-rent-management-system/frontend/public"
+      "D:/vue/Building/FrontEnd/house-rent-management-system-frontend/public": [
+        "src/D:/vue/Building/FrontEnd/house-rent-management-system-frontend/public"
       ],
       "public": [
         "public"

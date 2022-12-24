@@ -1,1 +1,1 @@
-export { default } from "file:///home/antukhan/Work/personal-project/house-rent-management-system/frontend/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
+export { default } from "file:///D:/vue/Building/FrontEnd/house-rent-management-system-frontend/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
