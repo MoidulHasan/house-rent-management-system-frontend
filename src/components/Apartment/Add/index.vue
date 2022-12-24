@@ -84,6 +84,20 @@
 			</div>
 
 			<div class="field">
+				<label for="Building_Name" class="mb-3"
+					>Building Name</label
+				>
+				<Dropdown
+					id="Building_Name"
+					v-model="apartmentData.Building_Name"
+					:options="buildingNames"
+					optionLabel="label"
+					optionValue="value"
+					placeholder="Select Building"
+				/>
+			</div>
+
+			<div class="field">
 				<label for="Status" class="mb-3">Status</label>
 				<Dropdown
 					id="Status"
@@ -166,6 +180,7 @@
 
 <script setup lang="ts">
 	import Appartment from "~/services/Appartment.Service";
+	import Building from "~/services/Building.Service";
 	import { useToast } from "primevue/usetoast";
 
 	// define props
@@ -186,11 +201,14 @@
 	const apartmentData = ref({
 		Unit_Name: null,
 		Descriptions: null,
+		Building_Name: null,
 		Category: null,
 		Status: null,
 		Rent_Charge: null,
 		Number_of_room: null,
 	});
+	const buildingNames = ref([]);
+
 	const submitted = ref(false);
 
 	const categories = ref([
@@ -210,8 +228,6 @@
 
 	const saveApartment = async () => {
 		const response = await Appartment.Create(apartmentData.value);
-
-		console.log(response);
 
 		if (response.status === "success") {
 			hideDialog();
@@ -241,6 +257,24 @@
 			});
 		}
 	};
+
+	const fetchBuldingNameOptions = async () => {
+		const response = await Building.fetchAll();
+
+		buildingNames.value =
+			response.status === "success"
+				? response.data.data.map((building) => {
+						return {
+							label: building.Building_Name,
+							value: building.Building_Name,
+						};
+				  })
+				: null;
+	};
+
+	onMounted(() => {
+		fetchBuldingNameOptions();
+	});
 </script>
 
 <style scoped></style>
