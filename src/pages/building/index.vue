@@ -92,25 +92,30 @@
 			/>
 
 			<Column
-				field="Caretaker_Phone "
+				field="Caretaker_Phone"
 				header="Caretaker Phone"
 				style="min-width: 10rem"
 			/>
 
 			<Column
 				:exportable="false"
-				style="min-width: 8rem"
+				style="min-width: 15rem"
 				header="Action"
 			>
 				<template #body="slotProps">
 					<Button
+						icon="pi pi-eye"
+						class="p-button-rounded p-button-success mr-2"
+						@click="viewData(slotProps.data)"
+					/>
+					<Button
 						icon="pi pi-pencil"
 						class="p-button-rounded p-button-success mr-2"
-						@click="editProduct(slotProps.data)"
+						@click="editData(slotProps.data)"
 					/>
 					<Button
 						icon="pi pi-trash"
-						class="p-button-rounded p-button-warning"
+						class="p-button-rounded p-button-danger text-white"
 						@click="confirmDelete(slotProps.data)"
 					/>
 				</template>
@@ -171,6 +176,7 @@
 
 	// define hooks
 	const toast = useToast();
+	const router = useRouter();
 
 	// define states
 	const breadCrumbItems = {
@@ -191,6 +197,7 @@
 	const showAddDialog = ref(false);
 	const buildingToDelete = ref(null);
 	const deleteDialog = ref(false);
+	const confirmDeleteSelected = ref(false);
 
 	// methods
 	onMounted(() => {
@@ -212,8 +219,6 @@
 	const fetchData = async () => {
 		const res = await Building.fetchAll();
 
-		console.log(res);
-
 		if (res.status === "success") {
 			BuildingData.value = res.data.data;
 		}
@@ -221,6 +226,15 @@
 
 	const buildingAdded = () => {
 		fetchData();
+	};
+
+	const viewData = (building) => {
+		console.log(building);
+		router.push("building/" + building.Building_Name);
+	};
+
+	const editData = (building) => {
+		console.log(building);
 	};
 
 	const confirmDelete = (apartment) => {
