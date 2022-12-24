@@ -23,6 +23,17 @@ const fetchAll = async () => {
     return response;
 };
 
+const fetchOne = async (Building_Name) => {
+    const config = useRuntimeConfig();
+    const apiUrl = config.public.apiUrl;
+
+    const response = await new FetchService().getData(
+        apiUrl + "/building/" + Building_Name
+    );
+
+
+    return response;
+};
 
 const Create = async (data) => {
     const config = useRuntimeConfig();
@@ -57,4 +68,4 @@ const Delete = async (id) => {
 //     return modelTest;
 // };
 
-export default { fetchAll, Create, Delete };
+export default { fetchAll, fetchOne, Create, Delete };
