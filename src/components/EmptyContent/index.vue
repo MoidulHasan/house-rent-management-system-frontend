@@ -10,7 +10,7 @@
 			/>
 		</div>
 		<div class="col-12 flex justify-content-center">
-			<h1 class="text-6xl font-bold">Sorry, No Content Found!!!</h1>
+			<h1 class="text-6xl font-bold">No Data Found!!!</h1>
 		</div>
 	</div>
 </template>
