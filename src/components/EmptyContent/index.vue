@@ -4,7 +4,7 @@
 			<img
 				width="200"
 				height="200"
-				src="images/icons/box/empty2.svg"
+				:src="'/images/icons/box/empty2.svg'"
 				alt=""
 				srcset=""
 			/>
