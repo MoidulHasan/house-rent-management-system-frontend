@@ -23,8 +23,9 @@
 				<small
 					class="p-error"
 					v-if="submitted && !apartmentData.Unit_Name"
-					>Name is required.</small
 				>
+					Name is required.
+				</small>
 			</div>
 
 			<div class="field">
@@ -81,12 +82,18 @@
 						</span>
 					</template>
 				</Dropdown>
+				<small
+					class="p-error"
+					v-if="submitted && !apartmentData.Category"
+				>
+					Category is required.
+				</small>
 			</div>
 
 			<div class="field">
-				<label for="Building_Name" class="mb-3"
-					>Building Name</label
-				>
+				<label for="Building_Name" class="mb-3">
+					Building Name
+				</label>
 				<Dropdown
 					id="Building_Name"
 					v-model="apartmentData.Building_Name"
@@ -95,6 +102,12 @@
 					optionValue="value"
 					placeholder="Select Building"
 				/>
+				<small
+					class="p-error"
+					v-if="submitted && !apartmentData.Building_Name"
+				>
+					Building Name is required.
+				</small>
 			</div>
 
 			<div class="field">
@@ -140,6 +153,12 @@
 						</span>
 					</template>
 				</Dropdown>
+				<small
+					class="p-error"
+					v-if="submitted && !apartmentData.Status"
+				>
+					Status is required.
+				</small>
 			</div>
 
 			<div class="formgrid grid">
@@ -149,7 +168,14 @@
 						id="price"
 						v-model="apartmentData.Rent_Charge"
 					/>
+					<small
+						class="p-error"
+						v-if="submitted && !apartmentData.Rent_Charge"
+					>
+						Rent Charge is required.
+					</small>
 				</div>
+
 				<div class="field col">
 					<label for="Number_of_room">Number of room</label>
 					<InputNumber
@@ -157,6 +183,12 @@
 						v-model="apartmentData.Number_of_room"
 						integeronly
 					/>
+					<small
+						class="p-error"
+						v-if="submitted && !apartmentData.Number_of_room"
+					>
+						Number of room is required.
+					</small>
 				</div>
 			</div>
 
@@ -186,13 +218,12 @@
 	// define props
 	const props = defineProps<{
 		showDialog: boolean;
-		buildingName?: null | string;
+		buildingName?: null | string | string[];
 	}>();
 
 	// define events
 	const emits = defineEmits<{
 		(e: "hideDialog"): void;
-		(e: "apartmentAdded"): void;
 	}>();
 
 	// hooks
@@ -224,10 +255,13 @@
 
 	// methods
 	const hideDialog = () => {
+		submitted.value = false;
 		emits("hideDialog");
 	};
 
 	const saveApartment = async () => {
+		submitted.value = true;
+
 		const response = await Appartment.Create(apartmentData.value);
 
 		if (response.status === "success") {
@@ -236,6 +270,7 @@
 			apartmentData.value = {
 				Unit_Name: null,
 				Descriptions: null,
+				Building_Name: null,
 				Category: null,
 				Status: null,
 				Rent_Charge: null,
@@ -247,8 +282,6 @@
 				detail: "Apartment Add Successful",
 				life: 3000,
 			});
-
-			emits("apartmentAdded");
 		} else {
 			toast.add({
 				severity: "error",
