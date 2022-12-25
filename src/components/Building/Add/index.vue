@@ -23,8 +23,9 @@
 				<small
 					class="p-error"
 					v-if="submitted && !buildingData.Building_Name"
-					>Name is required.</small
 				>
+					Name is required.
+				</small>
 			</div>
 
 			<div class="field">
@@ -36,6 +37,12 @@
 					rows="2"
 					cols="20"
 				/>
+				<small
+					class="p-error"
+					v-if="submitted && !buildingData.Address"
+				>
+					Address is required.
+				</small>
 			</div>
 
 			<div class="field">
@@ -100,7 +107,6 @@
 	// define events
 	const emits = defineEmits<{
 		(e: "hideDialog"): void;
-		(e: "buildingAdded"): void;
 	}>();
 
 	// hooks
@@ -119,10 +125,12 @@
 
 	// methods
 	const hideDialog = () => {
+		submitted.value = false;
 		emits("hideDialog");
 	};
 
 	const saveBuilding = async () => {
+		submitted.value = true;
 		const response = await Building.Create(buildingData.value);
 
 		if (response.status === "success") {
@@ -132,7 +140,7 @@
 				Building_Name: null,
 				Descriptions: null,
 				Address: null,
-				Caretaker_name: null,
+				Caretaker_Name: null,
 				Caretaker_Phone: null,
 			};
 
@@ -142,8 +150,6 @@
 				detail: "Building Add Successful",
 				life: 3000,
 			});
-
-			emits("buildingAdded");
 		} else {
 			toast.add({
 				severity: "error",
