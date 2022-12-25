@@ -20,14 +20,13 @@
 					label="No"
 					icon="pi pi-times"
 					class="p-button-text"
-					@click="onCanceled"
+					@click="handleCancel"
 				/>
-
 				<Button
 					label="Yes"
 					icon="pi pi-check"
 					class="p-button-text"
-					@click="deleteApartment"
+					@click="handleConfirm"
 				/>
 			</template>
 		</Dialog>
@@ -35,31 +34,47 @@
 </template>
 
 <script setup lang="ts">
-	import Appartment from "~/services/Appartment.Service";
+	import Apartment from "~/services/Appartment.Service";
+	import { useToast } from "primevue/usetoast";
+
+	// define hooks
+	const toast = useToast();
 
 	// define props
 	const props = defineProps<{
 		showDialog: boolean;
-		apartmentId: string;
+		apartmentId: string | null;
 	}>();
 
-	// define events
 	const emits = defineEmits<{
-		(e: "onDeleted", status: boolean): void;
 		(e: "onHide"): void;
 	}>();
 
-	// define methods
-	const onCanceled = () => {
+	// methods
+	const handleCancel = () => {
 		emits("onHide");
 	};
 
-	const deleteApartment = async () => {
-		const response = await Appartment.Delete(props.apartmentId);
+	const handleConfirm = async () => {
+		const response = await Apartment.Delete(props.apartmentId);
 
-		response.status === "success"
-			? emits("onDeleted", true)
-			: emits("onDeleted", false);
+		if (response.status === "success") {
+			toast.add({
+				severity: "success",
+				summary: "Success",
+				detail: "Apartment Delete Successful",
+				life: 3000,
+			});
+		} else {
+			toast.add({
+				severity: "error",
+				summary: "Failed",
+				detail: "Apartment Delete Failed",
+				life: 3000,
+			});
+		}
+
+		emits("onHide");
 	};
 </script>
 
