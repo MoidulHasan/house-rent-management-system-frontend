@@ -2,7 +2,7 @@
 	<div>
 		<DataTable
 			ref="dt"
-			:value="AppartmentData"
+			:value="apartmentData"
 			dataKey="_id"
 			:paginator="true"
 			:rows="10"
@@ -34,8 +34,14 @@
 			<Column
 				field="Unit_Name"
 				header="Unit Name"
-				style="width: 10%"
-			/>
+				style="min-width: 16rem"
+			>
+				<template #body="slotProps">
+					<a :href="'apartments/' + slotProps?.data?.Unit_Name">
+						{{ slotProps?.data?.Unit_Name }}
+					</a>
+				</template>
+			</Column>
 
 			<Column
 				field="Building_Name"
@@ -72,6 +78,11 @@
 			>
 				<template #body="slotProps">
 					<Button
+						icon="pi pi-eye"
+						class="p-button-rounded p-button-success mr-2"
+						@click="viewData(slotProps.data)"
+					/>
+					<Button
 						icon="pi pi-pencil"
 						class="p-button-rounded p-button-success mr-2"
 						@click="editRow(slotProps.data)"
@@ -105,17 +116,20 @@
 
 	// define props
 	const props = defineProps<{
-		AppartmentData: Apartment[];
+		apartmentData: Apartment[] | null;
+		exportTable: boolean;
 	}>();
 
 	//  define events
 	const emits = defineEmits<{
 		(e: "editData", value): void;
 		(e: "deleteData", value): void;
+		(e: "onExported"): void;
 	}>();
 
 	// define hooks
 	const toast = useToast();
+	const router = useRouter();
 
 	// define states
 	const dt = ref();
@@ -131,12 +145,13 @@
 
 	// methods
 
-	const exportCSV = () => {
-		dt.value.exportCSV();
+	// redirect to details page
+	const viewData = (building) => {
+		router.push("apartments/" + building.Unit_Name);
 	};
-
-	const apartmentAdded = () => {
-		// fetchData();
+	const exportCSV = () => {
+		emits("onExported");
+		dt.value.exportCSV();
 	};
 
 	const deleteRow = (apartment) => {
@@ -147,41 +162,11 @@
 		emits("editData", apartment);
 	};
 
-	const confirmDeleteSelected = (event) => {
-		console.log(selectedApartments.value);
-		deleteDialog.value = true;
-	};
-
-	const onDeleted = (status) => {
-		if (status) {
-			toast.add({
-				severity: "success",
-				summary: "Success",
-				detail: "Apartment Delete Successful",
-				life: 3000,
-			});
-
-			// fetchData();
-		} else {
-			toast.add({
-				severity: "error",
-				summary: "Failed",
-				detail: "Apartment Delete Failed",
-				life: 3000,
-			});
+	onUpdated(() => {
+		if (props.exportTable) {
+			exportCSV();
 		}
-	};
-
-	const onHide = () => {
-		deleteRowDialog.value = false;
-
-		toast.add({
-			severity: "info",
-			summary: "Canceled",
-			detail: "Apartment Delete Canceled",
-			life: 3000,
-		});
-	};
+	});
 </script>
 
 <style scoped></style>
