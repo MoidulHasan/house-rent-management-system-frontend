@@ -8,16 +8,7 @@
 					label="New"
 					icon="pi pi-plus"
 					class="p-button-success mr-2"
-					@click="showDialogAdd"
-				/>
-				<Button
-					label="Delete"
-					icon="pi pi-trash"
-					class="p-button-danger"
-					@click="confirmDeleteSelected"
-					:disabled="
-						!selectedBuilding || !selectedBuilding.length
-					"
+					@click="createData"
 				/>
 			</template>
 
@@ -34,14 +25,13 @@
 		<DataTable
 			ref="dt"
 			:value="BuildingData"
-			v-model:selection="selectedBuilding"
 			dataKey="_id"
 			:paginator="true"
 			:rows="10"
 			:filters="filters"
 			paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
 			:rowsPerPageOptions="[5, 10, 25]"
-			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+			currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
 			responsiveLayout="scroll"
 		>
 			<template #header>
@@ -49,7 +39,7 @@
 					class="table-header flex align-items-center justify-content-between"
 				>
 					<h5 class="mb-2 md:m-0 p-as-md-center">
-						Manage Building
+						Manage Buildings
 					</h5>
 					<div class="p-input-icon-left">
 						<i class="pi pi-search" />
@@ -62,16 +52,19 @@
 			</template>
 
 			<Column
-				selectionMode="multiple"
-				style="width: 3rem"
-				:exportable="false"
-			/>
-
-			<Column
 				field="Building_Name"
 				header="Building Name"
 				style="min-width: 16rem"
-			/>
+			>
+				<template #body="slotProps">
+					<a
+						:href="
+							'building/' + slotProps?.data?.Building_Name
+						"
+						>{{ slotProps?.data?.Building_Name }}</a
+					>
+				</template>
+			</Column>
 
 			<Column
 				field="Descriptions"
@@ -110,63 +103,42 @@
 					/>
 					<Button
 						icon="pi pi-pencil"
-						class="p-button-rounded p-button-success mr-2"
+						class="p-button-rounded p-button-warning text-white mr-2"
 						@click="editData(slotProps.data)"
 					/>
 					<Button
 						icon="pi pi-trash"
 						class="p-button-rounded p-button-danger text-white"
-						@click="confirmDelete(slotProps.data)"
+						@click="deleteData(slotProps.data._id)"
 					/>
 				</template>
 			</Column>
 		</DataTable>
 
-		<AddBuilding
+		<BuildingAdd
 			:show-dialog="showAddDialog"
 			@hide-dialog="hideDialogAdd"
-			@building-added="buildingAdded"
 		/>
 
-		<Dialog
-			v-model:visible="deleteDialog"
-			:style="{ width: '450px' }"
-			header="Confirm"
-			:modal="true"
-		>
-			<div class="confirmation-content">
-				<i
-					class="pi pi-exclamation-triangle mr-3"
-					style="font-size: 2rem"
-				/>
-				<span v-if="buildingToDelete">
-					Are you sure you want to delete the selected Building?
-				</span>
-			</div>
-			<template #footer>
-				<Button
-					label="No"
-					icon="pi pi-times"
-					class="p-button-text"
-					@click="deleteDialog = false"
-				/>
-				<Button
-					label="Yes"
-					icon="pi pi-check"
-					class="p-button-text"
-					@click="deleteSelectedApartment"
-				/>
-			</template>
-		</Dialog>
+		<BuildingEdit
+			:data="editableData"
+			:show-dialog="showEditDialog"
+			@on-submit="handleEditSubmit"
+			@on-hide="hideEditDialog"
+		/>
+
+		<BuildingDelete
+			:building-id="deleteRowId"
+			:show-dialog="showDeleteDialog"
+			@on-hide="hideDeleteDialog"
+		/>
 	</div>
 </template>
 
-<script setup>
-	import Appartment from "~/services/Appartment.Service";
+<script setup lang="ts">
 	import Building from "~/services/Building.Service";
-
+	import { useStore } from "~~/src/stores/store";
 	import { FilterMatchMode } from "primevue/api";
-	import { useToast } from "primevue/usetoast";
 
 	// define page meta
 	definePageMeta({
@@ -175,8 +147,8 @@
 	});
 
 	// define hooks
-	const toast = useToast();
 	const router = useRouter();
+	const store = useStore();
 
 	// define states
 	const breadCrumbItems = {
@@ -190,32 +162,34 @@
 
 	const dt = ref();
 	const BuildingData = ref(null);
-	const selectedBuilding = ref();
 	const filters = ref({
 		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 	});
+
+	// add related states
 	const showAddDialog = ref(false);
-	const buildingToDelete = ref(null);
-	const deleteDialog = ref(false);
-	const confirmDeleteSelected = ref(false);
+
+	// edit data related states
+	const showEditDialog = ref(false);
+	const editableData = ref(null);
+
+	// delete data related states
+	const showDeleteDialog = ref(false);
+	const deleteRowId = ref(null);
 
 	// methods
-	onMounted(() => {
-		fetchData();
+	onMounted(async () => {
+		store.loading = true;
+		await fetchData();
+		store.loading = false;
 	});
 
+	// export table
 	const exportCSV = () => {
 		dt.value.exportCSV();
 	};
 
-	const showDialogAdd = () => {
-		showAddDialog.value = true;
-	};
-
-	const hideDialogAdd = () => {
-		showAddDialog.value = false;
-	};
-
+	// fetch table data form the backend
 	const fetchData = async () => {
 		const res = await Building.fetchAll();
 
@@ -224,46 +198,51 @@
 		}
 	};
 
-	const buildingAdded = () => {
-		fetchData();
-	};
-
+	// redirect to details page
 	const viewData = (building) => {
-		console.log(building);
 		router.push("building/" + building.Building_Name);
 	};
 
-	const editData = (building) => {
-		console.log(building);
+	// Create related methods
+	const createData = () => {
+		showAddDialog.value = true;
 	};
 
-	const confirmDelete = (apartment) => {
-		buildingToDelete.value = apartment;
-		deleteDialog.value = true;
+	const hideDialogAdd = () => {
+		showAddDialog.value = false;
 	};
 
-	const deleteSelectedApartment = async () => {
-		const response = await Building.Delete(buildingToDelete.value._id);
+	// edit data related methods
+	const editData = (data) => {
+		editableData.value = toRaw(data);
+		showEditDialog.value = true;
+	};
 
-		deleteDialog.value = false;
+	const hideEditDialog = async () => {
+		editableData.value = null;
+		showEditDialog.value = false;
+		await fetchData();
+	};
 
-		if (response.status === "success") {
-			toast.add({
-				severity: "success",
-				summary: "Success",
-				detail: "Apartment Delete Successful",
-				life: 3000,
-			});
-
-			fetchData();
-		} else {
-			toast.add({
-				severity: "error",
-				summary: "Failed",
-				detail: "Apartment Delete Failed",
-				life: 3000,
-			});
+	const handleEditSubmit = async (status: Boolean) => {
+		if (status) {
+			hideEditDialog();
+			store.loading = true;
+			await fetchData();
+			store.loading = false;
 		}
+	};
+
+	// delete related methods
+	const deleteData = (id: string) => {
+		showDeleteDialog.value = true;
+		deleteRowId.value = id;
+	};
+
+	const hideDeleteDialog = async () => {
+		showDeleteDialog.value = false;
+		deleteRowId.value = null;
+		await fetchData();
 	};
 </script>
 
