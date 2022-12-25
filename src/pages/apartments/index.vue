@@ -10,15 +10,6 @@
 					class="p-button-success mr-2"
 					@click="showDialogAdd"
 				/>
-				<Button
-					label="Delete"
-					icon="pi pi-trash"
-					class="p-button-danger"
-					@click="confirmDeleteSelected"
-					:disabled="
-						!selectedApartments || !selectedApartments.length
-					"
-				/>
 			</template>
 
 			<template #end>
@@ -31,123 +22,37 @@
 			</template>
 		</Toolbar>
 
-		<DataTable
-			ref="dt"
-			:value="AppartmentData"
-			v-model:selection="selectedApartments"
-			dataKey="_id"
-			:paginator="true"
-			:rows="10"
-			:filters="filters"
-			paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-			:rowsPerPageOptions="[5, 10, 25]"
-			currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-			responsiveLayout="scroll"
-		>
-			<template #header>
-				<div
-					class="table-header flex align-items-center justify-content-between"
-				>
-					<h5 class="mb-2 md:m-0 p-as-md-center">
-						Manage Apartments
-					</h5>
-					<div class="p-input-icon-left">
-						<i class="pi pi-search" />
-						<InputText
-							v-model="filters['global'].value"
-							placeholder="Search..."
-						/>
-					</div>
-				</div>
-			</template>
-
-			<Column
-				selectionMode="multiple"
-				style="width: 3rem"
-				:exportable="false"
-			/>
-
-			<Column
-				field="Building_Name"
-				header="Building Name"
-				style="min-width: 16rem"
-			/>
-
-			<Column
-				field="Unit_Name"
-				header="Unit Name"
-				style="min-width: 16rem"
-			/>
-
-			<Column
-				field="Descriptions"
-				header="Descriptions"
-				style="min-width: 16rem"
-			/>
-
-			<Column
-				field="Category"
-				header="Category"
-				style="min-width: 10rem"
-			/>
-
-			<Column
-				field="Number_of_room"
-				header="Number_of_room"
-				style="min-width: 10rem"
-			/>
-
-			<Column
-				field="Rent_Charge"
-				header="Rent Charge"
-				style="min-width: 10rem"
-			/>
-
-			<Column
-				field="Status"
-				header="Status"
-				style="min-width: 10rem"
-			/>
-
-			<Column
-				:exportable="false"
-				style="min-width: 8rem"
-				header="Action"
-			>
-				<template #body="slotProps">
-					<Button
-						icon="pi pi-pencil"
-						class="p-button-rounded p-button-success mr-2"
-						@click="editProduct(slotProps.data)"
-					/>
-					<Button
-						icon="pi pi-trash"
-						class="p-button-rounded p-button-danger text-white"
-						@click="deleteRow(slotProps.data)"
-					/>
-				</template>
-			</Column>
-		</DataTable>
+		<ApartmentTable
+			:apartment-data="AppartmentData"
+			:export-table="exportTable"
+			@edit-data="editData"
+			@delete-data="deleteData"
+			@on-exported="exported"
+		/>
 
 		<ApartmentAdd
 			:show-dialog="showAddDialog"
 			@hide-dialog="hideDialogAdd"
-			@apartment-added="apartmentAdded"
 		/>
 
-		<ApartmentDeleteRow
-			:apartment-id="rowIdToDelete"
-			:show-dialog="deleteRowDialog"
-			@on-deleted="onDeleted"
-			@on-hide="onHide"
+		<ApartmentEdit
+			:show-dialog="showEditDialog"
+			:data="editableData"
+			@hide-dialog="hideEditDialog"
+		/>
+
+		<ApartmentDelete
+			:apartment-id="deleteRowId"
+			:show-dialog="showDeleteDialog"
+			@on-deleted="deleteData"
+			@on-hide="hideDeleteDialog"
 		/>
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 	import Appartment from "~/services/Appartment.Service";
-	import { FilterMatchMode } from "primevue/api";
-	import { useToast } from "primevue/usetoast";
+	import { useStore } from "~~/src/stores/store";
 
 	// define page meta
 	definePageMeta({
@@ -155,10 +60,10 @@
 		middleware: ["auth"],
 	});
 
-	// define hooks
-	const toast = useToast();
+	// hooks
+	const store = useStore();
 
-	// define states
+	// states
 	const breadCrumbItems = {
 		label: "Home",
 		url: "/",
@@ -167,36 +72,26 @@
 			url: "/appartments",
 		},
 	};
-
-	const dt = ref();
 	const AppartmentData = ref(null);
-	const selectedApartments = ref();
-	const filters = ref({
-		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-	});
-	const showAddDialog = ref(false);
-	const deleteDialog = ref(false);
 
-	// delete single row
-	const rowIdToDelete = ref(null);
-	const deleteRowDialog = ref(false);
+	// export related states
+	const exportTable = ref(false);
+
+	// add related states
+	const showAddDialog = ref(false);
+
+	// edit related states
+	const editableData = ref(null);
+	const showEditDialog = ref(false);
+
+	// delete data related states
+	const showDeleteDialog = ref(false);
+	const deleteRowId = ref(null);
 
 	// methods
 	onMounted(() => {
 		fetchData();
 	});
-
-	const exportCSV = () => {
-		dt.value.exportCSV();
-	};
-
-	const showDialogAdd = () => {
-		showAddDialog.value = true;
-	};
-
-	const hideDialogAdd = () => {
-		showAddDialog.value = false;
-	};
 
 	const fetchData = async () => {
 		const res = await Appartment.fetchAll();
@@ -206,49 +101,49 @@
 		}
 	};
 
-	const apartmentAdded = () => {
+	// export related method
+	const exportCSV = (event) => {
+		exportTable.value = true;
+	};
+
+	const exported = () => {
+		exportTable.value = false;
+	};
+
+	// add related methods
+	const showDialogAdd = () => {
+		showAddDialog.value = true;
+	};
+
+	const hideDialogAdd = () => {
+		showAddDialog.value = false;
 		fetchData();
 	};
 
-	const deleteRow = (apartment) => {
-		rowIdToDelete.value = apartment._id;
-		deleteRowDialog.value = true;
+	// edit related methods
+	const editData = (data) => {
+		editableData.value = data;
+		showEditDialog.value = true;
 	};
 
-	const confirmDeleteSelected = (event) => {
-		console.log(selectedApartments.value);
-		deleteDialog.value = true;
+	const hideEditDialog = async () => {
+		editableData.value = null;
+		showEditDialog.value = false;
+		store.loading = true;
+		await fetchData();
+		store.loading = false;
 	};
 
-	const onDeleted = (status) => {
-		if (status) {
-			toast.add({
-				severity: "success",
-				summary: "Success",
-				detail: "Apartment Delete Successful",
-				life: 3000,
-			});
-
-			fetchData();
-		} else {
-			toast.add({
-				severity: "error",
-				summary: "Failed",
-				detail: "Apartment Delete Failed",
-				life: 3000,
-			});
-		}
+	// delete related methods
+	const deleteData = (id: string) => {
+		showDeleteDialog.value = true;
+		deleteRowId.value = id;
 	};
 
-	const onHide = () => {
-		deleteRowDialog.value = false;
-
-		toast.add({
-			severity: "info",
-			summary: "Canceled",
-			detail: "Apartment Delete Canceled",
-			life: 3000,
-		});
+	const hideDeleteDialog = async () => {
+		showDeleteDialog.value = false;
+		deleteRowId.value = null;
+		await fetchData();
 	};
 </script>
 
