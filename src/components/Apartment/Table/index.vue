@@ -37,7 +37,14 @@
 				style="min-width: 16rem"
 			>
 				<template #body="slotProps">
-					<a :href="'apartments/' + slotProps?.data?.Unit_Name">
+					<a
+						:href="
+							'apartments/' +
+							slotProps?.data?.Building_Name +
+							'/' +
+							slotProps?.data?.Unit_Name
+						"
+					>
 						{{ slotProps?.data?.Unit_Name }}
 					</a>
 				</template>
@@ -94,6 +101,10 @@
 					/>
 				</template>
 			</Column>
+
+			<template #empty>
+				<EmptyContent />
+			</template>
 		</DataTable>
 	</div>
 </template>
@@ -146,8 +157,10 @@
 	// methods
 
 	// redirect to details page
-	const viewData = (building) => {
-		router.push("apartments/" + building.Unit_Name);
+	const viewData = (data) => {
+		router.replace(
+			"/apartments/" + data.Building_Name + "/" + data.Unit_Name
+		);
 	};
 	const exportCSV = () => {
 		emits("onExported");

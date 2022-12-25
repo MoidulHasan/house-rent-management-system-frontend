@@ -208,8 +208,9 @@
 		showAddDialog.value = true;
 	};
 
-	const hideDialogAdd = () => {
+	const hideDialogAdd = async () => {
 		showAddDialog.value = false;
+		await fetchData();
 	};
 
 	// edit data related methods
