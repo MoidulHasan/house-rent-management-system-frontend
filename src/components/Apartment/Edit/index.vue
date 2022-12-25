@@ -230,7 +230,7 @@
 	const props = defineProps<{
 		showDialog: boolean;
 		buildingName?: string;
-		data: Apartment;
+		data: Apartment | null;
 	}>();
 
 	// define events
