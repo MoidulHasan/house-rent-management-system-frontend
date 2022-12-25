@@ -45,6 +45,16 @@ const Delete = async (id) => {
     return response;
 };
 
+const Update = async (id, data) => {
+    const config = useRuntimeConfig();
+    const apiUrl = config.public.apiUrl;
+
+    const response = await new FetchService().putData(
+        apiUrl + "/apartments/" + id, data
+    );
+
+    return response;
+};
 // const fetchByPageNumber = async (page: number) => {
 //     const config = useRuntimeConfig();
 //     const baseUrl = config.public.apiBase;
@@ -56,4 +66,4 @@ const Delete = async (id) => {
 //     return modelTest;
 // };
 
-export default { fetchAll, Create, Delete };
+export default { fetchAll, Create, Delete, Update };
