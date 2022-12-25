@@ -320,6 +320,21 @@
 			fetchBuldingNameOptions();
 		}
 	});
+
+	onUpdated(() => {
+		if (props.buildingName) {
+			buildingNames.value = [
+				{
+					label: props.buildingName,
+					value: props.buildingName,
+				},
+			];
+
+			apartmentData.value.Building_Name = props.buildingName;
+		} else {
+			fetchBuldingNameOptions();
+		}
+	});
 </script>
 
 <style scoped></style>
