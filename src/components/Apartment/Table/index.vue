@@ -34,7 +34,7 @@
 			<Column
 				field="Unit_Name"
 				header="Unit Name"
-				style="min-width: 16rem"
+				style="min-width: 8rem"
 			>
 				<template #body="slotProps">
 					<a
@@ -53,7 +53,7 @@
 			<Column
 				field="Building_Name"
 				header="Building Name"
-				style="width: 10%"
+				style="width: 8%"
 			/>
 
 			<Column
@@ -67,20 +67,20 @@
 			<Column
 				field="Number_of_room"
 				header="Number_of_room"
-				style="width: 10%"
+				style="width: 8%"
 			/>
 
 			<Column
 				field="Rent_Charge"
 				header="Rent Charge"
-				style="width: 10%"
+				style="width: 8%"
 			/>
 
-			<Column field="Status" header="Status" style="width: 10%" />
+			<Column field="Status" header="Status" style="width: 8%" />
 
 			<Column
 				:exportable="false"
-				style="min-width: 15%"
+				style="min-width: 20%"
 				header="Action"
 			>
 				<template #body="slotProps">
