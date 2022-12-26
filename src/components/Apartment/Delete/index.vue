@@ -5,6 +5,7 @@
 			:style="{ width: '450px' }"
 			header="Confirm"
 			:modal="true"
+			:closable="false"
 		>
 			<div class="confirmation-content">
 				<i
