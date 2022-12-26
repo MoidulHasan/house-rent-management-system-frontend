@@ -54,7 +54,7 @@
 			<Column
 				field="Building_Name"
 				header="Building Name"
-				style="min-width: 16rem"
+				style="max-width: 5%"
 			>
 				<template #body="slotProps">
 					<a
@@ -69,30 +69,30 @@
 			<Column
 				field="Descriptions"
 				header="Descriptions"
-				style="min-width: 16rem"
+				style="max-width: 15%"
 			/>
 
 			<Column
 				field="Address"
 				header="Address"
-				style="min-width: 16rem"
+				style="max-width: 10%"
 			/>
 
 			<Column
 				field="Caretaker_Name"
 				header="Caretaker Name"
-				style="min-width: 10rem"
+				style="max-width: 10%"
 			/>
 
 			<Column
 				field="Caretaker_Phone"
 				header="Caretaker Phone"
-				style="min-width: 10rem"
+				style="max-width: 10%"
 			/>
 
 			<Column
 				:exportable="false"
-				style="min-width: 15rem"
+				style="max-width: 20%"
 				header="Action"
 			>
 				<template #body="slotProps">

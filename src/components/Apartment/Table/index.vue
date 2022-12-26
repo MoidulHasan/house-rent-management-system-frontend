@@ -49,7 +49,7 @@
 			<Column
 				field="Building_Name"
 				header="Building Name"
-				style="min-width: 16rem"
+				style="width: 8%"
 			>
 				<template #body="slotProps">
 					<a
