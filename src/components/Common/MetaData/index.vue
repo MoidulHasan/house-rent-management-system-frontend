@@ -1,7 +1,8 @@
 <template>
 	<div class="meta-tag">
 		<span class="meta-title">{{ dataKey }} : </span>
-		<span class="meta-data ml-3"> {{ value }}</span>
+		<span v-if="value" class="meta-data ml-3"> {{ value }}</span>
+		<slot />
 	</div>
 </template>
 
@@ -9,7 +10,7 @@
 	// props
 	const props = defineProps<{
 		dataKey: string;
-		value: string;
+		value?: string;
 	}>();
 </script>
 
