@@ -7,6 +7,7 @@
 			:modal="true"
 			class="p-fluid"
 			:closable="false"
+			:draggable="false"
 		>
 			<div class="field">
 				<label for="Unit_Name">Unit Name</label>
