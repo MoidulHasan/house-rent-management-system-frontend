@@ -1,15 +1,5 @@
 import FetchService from "./Fetch.Service";
 
-// const fetchOne = async (id: number) => {
-//     const config = useRuntimeConfig();
-//     const baseUrl = config.public.apiBase;
-
-//     const modelTest = await new FetchService().getData(
-//         baseUrl + "/model-tests/" + id
-//     );
-
-//     return modelTest;
-// };
 
 const fetchAll = async () => {
     const config = useRuntimeConfig();
@@ -55,15 +45,6 @@ const Update = async (id, data) => {
 
     return response;
 };
-// const fetchByPageNumber = async (page: number) => {
-//     const config = useRuntimeConfig();
-//     const baseUrl = config.public.apiBase;
 
-//     const modelTest = await new FetchService().getData(
-//         baseUrl + "/model-tests?page=" + page
-//     );
-
-//     return modelTest;
-// };
 
 export default { fetchAll, Create, Delete, Update };
