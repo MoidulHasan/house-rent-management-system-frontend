@@ -35,14 +35,14 @@
 			@hide-dialog="hideDialogAdd"
 		/>
 
-		<ApartmentEdit
+		<RenterEdit
 			:show-dialog="showEditDialog"
 			:data="editableData"
 			@hide-dialog="hideEditDialog"
 		/>
 
-		<ApartmentDelete
-			:apartment-id="deleteRowId"
+		<RenterDelete
+			:renter-id="deleteRowId"
 			:show-dialog="showDeleteDialog"
 			@on-deleted="deleteData"
 			@on-hide="hideDeleteDialog"
