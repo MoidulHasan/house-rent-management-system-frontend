@@ -39,7 +39,7 @@
 				<template #body="slotProps">
 					<a
 						:href="
-							'apartments/' +
+							'/apartments/' +
 							slotProps?.data?.Building_Name +
 							'/' +
 							slotProps?.data?.Unit_Name
@@ -158,7 +158,7 @@
 
 	// redirect to details page
 	const viewData = (data) => {
-		router.replace(
+		router.push(
 			"/apartments/" + data.Building_Name + "/" + data.Unit_Name
 		);
 	};
