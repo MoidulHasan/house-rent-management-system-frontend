@@ -3,21 +3,26 @@
 
 	<div class="card">
 		<h4 class="flex">
-			<span>Building Name : </span>
-			<span class="ml-2"> {{ route.params.Building_Name }}</span>
-		</h4>
-		<h4 class="flex">
 			<span>Apartment Name : </span>
 			<span class="ml-2"> {{ route.params.Apartment_Name }}</span>
 		</h4>
-		<p>
-			<span>Descriptions : </span>
-			<span>{{ ApartmentData?.Descriptions }}</span>
-		</p>
 
-		<div class="flex align-items-center">
-			<div class="mr-3 flex align-items-center">
-				<div>Status :</div>
+		<div class="mt-2">
+			<CommonMetaData
+				:data-key="'Building Name '"
+				:value="route.params.Building_Name"
+			/>
+		</div>
+
+		<div class="mt-2">
+			<CommonMetaData
+				:data-key="'Descriptions '"
+				:value="ApartmentData.Descriptions"
+			/>
+		</div>
+
+		<div class="mt-2 flex align-items-center">
+			<CommonMetaData :data-key="'Status '">
 				<Badge
 					:value="ApartmentData?.Status"
 					class="text-white ml-2"
@@ -27,24 +32,23 @@
 							: 'success'
 					"
 				/>
-			</div>
-			<div class="mr-3 flex align-items-center">
-				<div>Rent Charge :</div>
+			</CommonMetaData>
+
+			<CommonMetaData :data-key="'Rent Charge '" class="ml-3">
 				<Badge
 					:value="ApartmentData?.Rent_Charge"
 					class="text-white ml-2"
 					severity="info"
 				/>
-			</div>
+			</CommonMetaData>
 
-			<div class="mr-3 flex align-items-center">
-				<div>Number of room :</div>
+			<CommonMetaData :data-key="'Number of room '" class="ml-3">
 				<Badge
 					:value="ApartmentData?.Number_of_room"
 					class="text-white ml-2"
 					severity="info"
 				/>
-			</div>
+			</CommonMetaData>
 		</div>
 	</div>
 </template>
