@@ -31,16 +31,9 @@
 				</div>
 			</template>
 
-			<Column field="Name" header="Name" style="min-width: 16rem">
+			<Column field="Name" header="Name" style="max-width: 10%">
 				<template #body="slotProps">
-					<a
-						:href="
-							'apartments/' +
-							slotProps?.data?.Name +
-							'/' +
-							slotProps?.data?.Name
-						"
-					>
+					<a :href="'renters/' + slotProps?.data?.Name">
 						{{ slotProps?.data?.Name }}
 					</a>
 				</template>
@@ -49,7 +42,7 @@
 			<Column
 				field="Building_Name"
 				header="Building Name"
-				style="min-width: 16rem"
+				style="max-width: 10%"
 			>
 				<template #body="slotProps">
 					<a
@@ -64,12 +57,45 @@
 			<Column
 				field="Apartment_Name"
 				header="Apartment Name"
-				style="width: 10%"
+				style="max-width: 10%"
+			>
+				<template #body="slotProps">
+					<a
+						:href="
+							'/apartments/' +
+							slotProps?.data?.Building_Name +
+							'/' +
+							slotProps?.data?.Apartment_Name
+						"
+					>
+						{{ slotProps?.data?.Apartment_Name }}
+					</a>
+				</template>
+			</Column>
+
+			<Column
+				field="Phone"
+				header="Phone Number"
+				style="max-width: 10%"
 			/>
 
-			<Column field="NID" header="NID Number" style="width: 10%" />
+			<Column
+				field="Rent_Start_Date"
+				header="Rent Start Date"
+				style="max-width: 10%"
+			>
+				<template #body="slotProps">
+					{{
+						slotProps.data.Rent_Start_Date
+							? formatedStartDate(
+									slotProps.data.Rent_Start_Date
+							  )
+							: "N/A"
+					}}
+				</template>
+			</Column>
 
-			<Column field="Phone" header="Phone Number" style="width: 20%" />
+			<Column field="NID" header="NID Number" style="width: 10%" />
 
 			<Column
 				field="Permanent_Address"
@@ -119,6 +145,7 @@
 		Name: string;
 		NID: string;
 		Phone: string;
+		Rent_Start_Date: string;
 		Permanent_Address: string;
 		Building_Name: string;
 		Apartment_Name: string;
@@ -154,12 +181,20 @@
 	const deleteRowDialog = ref(false);
 
 	// methods
+	const formatedStartDate = (Rent_Start_Date) => {
+		const rentDate = new Date(Rent_Start_Date);
+		return (
+			rentDate.getDate() +
+			"/" +
+			rentDate.getMonth() +
+			"/" +
+			rentDate.getFullYear()
+		);
+	};
 
 	// redirect to details page
 	const viewData = (data) => {
-		router.replace(
-			"/renters/" + data.Building_Name + "/" + data.Unit_Name
-		);
+		router.replace("/renters/" + data.Name);
 	};
 
 	const exportCSV = () => {
