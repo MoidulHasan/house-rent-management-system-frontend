@@ -114,14 +114,14 @@
 					:options="apartmentNames"
 					optionLabel="label"
 					optionValue="value"
-					placeholder="Select Building"
+					placeholder="Select Apartment"
 					:disabled="!renterData.Building_Name"
 				/>
 				<small
 					class="p-error"
-					v-if="submitted && !renterData.Building_Name"
+					v-if="submitted && !renterData.Apartment_Name"
 				>
-					Building Name is required.
+					Apartment Name is required.
 				</small>
 			</div>
 
