@@ -48,9 +48,18 @@
 
 			<Column
 				field="Building_Name"
-				header="Building_Name"
-				style="width: 10%"
-			/>
+				header="Building Name"
+				style="min-width: 16rem"
+			>
+				<template #body="slotProps">
+					<a
+						:href="
+							'building/' + slotProps?.data?.Building_Name
+						"
+						>{{ slotProps?.data?.Building_Name }}</a
+					>
+				</template>
+			</Column>
 
 			<Column
 				field="Apartment_Name"

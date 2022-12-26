@@ -31,11 +31,7 @@
 				</div>
 			</template>
 
-			<Column
-				field="Unit_Name"
-				header="Unit Name"
-				style="min-width: 8rem"
-			>
+			<Column field="Unit_Name" header="Unit Name" style="width: 8%">
 				<template #body="slotProps">
 					<a
 						:href="
@@ -53,8 +49,17 @@
 			<Column
 				field="Building_Name"
 				header="Building Name"
-				style="width: 8%"
-			/>
+				style="min-width: 16rem"
+			>
+				<template #body="slotProps">
+					<a
+						:href="
+							'building/' + slotProps?.data?.Building_Name
+						"
+						>{{ slotProps?.data?.Building_Name }}</a
+					>
+				</template>
+			</Column>
 
 			<Column
 				field="Descriptions"
