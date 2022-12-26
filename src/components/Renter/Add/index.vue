@@ -53,6 +53,21 @@
 			</div>
 
 			<div class="field">
+				<label for="Rent_Start_Date">Rent Start Date</label>
+				<Calendar
+					id="Rent_Start_Date"
+					v-model="renterData.Rent_Start_Date"
+					required="true"
+				/>
+				<small
+					class="p-error"
+					v-if="submitted && !renterData.Phone"
+				>
+					Rent Start Date is required.
+				</small>
+			</div>
+
+			<div class="field">
 				<label for="Permanent_Address">Permanent Address</label>
 				<Textarea
 					id="Permanent_Address"
@@ -153,6 +168,7 @@
 		Name: null,
 		NID: null,
 		Phone: null,
+		Rent_Start_Date: null,
 		Permanent_Address: null,
 		Building_Name: null,
 		Apartment_Name: null,
@@ -180,6 +196,7 @@
 				Name: null,
 				NID: null,
 				Phone: null,
+				Rent_Start_Date: null,
 				Permanent_Address: null,
 				Building_Name: null,
 				Apartment_Name: null,
