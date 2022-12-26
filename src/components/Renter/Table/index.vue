@@ -33,7 +33,7 @@
 
 			<Column field="Name" header="Name" style="max-width: 10%">
 				<template #body="slotProps">
-					<a :href="'renters/' + slotProps?.data?.Name">
+					<a :href="'renters/' + slotProps?.data?._id">
 						{{ slotProps?.data?.Name }}
 					</a>
 				</template>
@@ -194,7 +194,7 @@
 
 	// redirect to details page
 	const viewData = (data) => {
-		router.replace("/renters/" + data.Name);
+		router.replace("/renters/" + data._id);
 	};
 
 	const exportCSV = () => {
