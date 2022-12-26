@@ -88,130 +88,128 @@ import Image from "primevue/image";
 
 import { defineNuxtPlugin } from "#app";
 import CodeHighlight from "~/directives/code";
-import BlockViewer from "~/components/Common/BlockViewer.vue";
 
 declare interface AppState {
-  theme?: string;
-  darkTheme?: boolean;
+	theme?: string;
+	darkTheme?: boolean;
 }
 
 export default defineNuxtPlugin(({ vueApp: app }) => {
-  app.use(PrimeVue, {
-    ripple: true,
-    inputStyle: "outlined",
-  });
+	app.use(PrimeVue, {
+		ripple: true,
+		inputStyle: "outlined",
+	});
 
-  app.use(ConfirmationService);
-  app.use(ToastService);
+	app.use(ConfirmationService);
+	app.use(ToastService);
 
-  app.directive("tooltip", Tooltip);
-  app.directive("ripple", Ripple);
-  app.directive("code", CodeHighlight);
-  app.directive("badge", BadgeDirective);
-  app.directive("styleclass", StyleClass);
+	app.directive("tooltip", Tooltip);
+	app.directive("ripple", Ripple);
+	app.directive("code", CodeHighlight);
+	app.directive("badge", BadgeDirective);
+	app.directive("styleclass", StyleClass);
 
-  app.component("Accordion", Accordion);
-  app.component("AccordionTab", AccordionTab);
-  app.component("AutoComplete", AutoComplete);
-  app.component("Avatar", Avatar);
-  app.component("AvatarGroup", AvatarGroup);
-  app.component("Badge", Badge);
-  app.component("Breadcrumb", Breadcrumb);
-  app.component("Button", Button);
-  app.component("Calendar", Calendar);
-  app.component("Card", Card);
-  app.component("Carousel", Carousel);
-  app.component("Chart", Chart);
-  app.component("Checkbox", Checkbox);
-  app.component("Chip", Chip);
-  app.component("Chips", Chips);
-  app.component("ColorPicker", ColorPicker);
-  app.component("Column", Column);
-  app.component("ConfirmDialog", ConfirmDialog);
-  app.component("ConfirmPopup", ConfirmPopup);
-  app.component("ContextMenu", ContextMenu);
-  app.component("DataTable", DataTable);
-  app.component("DataView", DataView);
-  app.component("DataViewLayoutOptions", DataViewLayoutOptions);
-  app.component("Dialog", Dialog);
-  app.component("Divider", Divider);
-  app.component("Dropdown", Dropdown);
-  app.component("Fieldset", Fieldset);
-  app.component("FileUpload", FileUpload);
-  app.component("InlineMessage", InlineMessage);
-  app.component("Inplace", Inplace);
-  app.component("InputMask", InputMask);
-  app.component("InputNumber", InputNumber);
-  app.component("InputSwitch", InputSwitch);
-  app.component("InputText", InputText);
-  app.component("Galleria", Galleria);
-  app.component("Knob", Knob);
-  app.component("Listbox", Listbox);
-  app.component("MegaMenu", MegaMenu);
-  app.component("Menu", Menu);
-  app.component("Menubar", Menubar);
-  app.component("Message", Message);
-  app.component("MultiSelect", MultiSelect);
-  app.component("OrderList", OrderList);
-  app.component("OrganizationChart", OrganizationChart);
-  app.component("OverlayPanel", OverlayPanel);
-  app.component("Paginator", Paginator);
-  app.component("Panel", Panel);
-  app.component("PanelMenu", PanelMenu);
-  app.component("Password", Password);
-  app.component("PickList", PickList);
-  app.component("ProgressBar", ProgressBar);
-  app.component("RadioButton", RadioButton);
-  app.component("Rating", Rating);
-  app.component("SelectButton", SelectButton);
-  app.component("ScrollPanel", ScrollPanel);
-  app.component("ScrollTop", ScrollTop);
-  app.component("Slider", Slider);
-  app.component("Sidebar", Sidebar);
-  app.component("Skeleton", Skeleton);
-  app.component("SplitButton", SplitButton);
-  app.component("Splitter", Splitter);
-  app.component("SplitterPanel", SplitterPanel);
-  app.component("Steps", Steps);
-  app.component("TabMenu", TabMenu);
-  app.component("TabView", TabView);
-  app.component("TabPanel", TabPanel);
-  app.component("Tag", Tag);
-  app.component("Textarea", Textarea);
-  app.component("TieredMenu", TieredMenu);
-  app.component("Timeline", Timeline);
-  app.component("Toast", Toast);
-  app.component("Toolbar", Toolbar);
-  app.component("ToggleButton", ToggleButton);
-  app.component("Tree", Tree);
-  app.component("TreeSelect", TreeSelect);
-  app.component("TreeTable", TreeTable);
-  app.component("TriStateCheckbox", TriStateCheckbox);
-  app.component("Editor", Editor);
+	app.component("Accordion", Accordion);
+	app.component("AccordionTab", AccordionTab);
+	app.component("AutoComplete", AutoComplete);
+	app.component("Avatar", Avatar);
+	app.component("AvatarGroup", AvatarGroup);
+	app.component("Badge", Badge);
+	app.component("Breadcrumb", Breadcrumb);
+	app.component("Button", Button);
+	app.component("Calendar", Calendar);
+	app.component("Card", Card);
+	app.component("Carousel", Carousel);
+	app.component("Chart", Chart);
+	app.component("Checkbox", Checkbox);
+	app.component("Chip", Chip);
+	app.component("Chips", Chips);
+	app.component("ColorPicker", ColorPicker);
+	app.component("Column", Column);
+	app.component("ConfirmDialog", ConfirmDialog);
+	app.component("ConfirmPopup", ConfirmPopup);
+	app.component("ContextMenu", ContextMenu);
+	app.component("DataTable", DataTable);
+	app.component("DataView", DataView);
+	app.component("DataViewLayoutOptions", DataViewLayoutOptions);
+	app.component("Dialog", Dialog);
+	app.component("Divider", Divider);
+	app.component("Dropdown", Dropdown);
+	app.component("Fieldset", Fieldset);
+	app.component("FileUpload", FileUpload);
+	app.component("InlineMessage", InlineMessage);
+	app.component("Inplace", Inplace);
+	app.component("InputMask", InputMask);
+	app.component("InputNumber", InputNumber);
+	app.component("InputSwitch", InputSwitch);
+	app.component("InputText", InputText);
+	app.component("Galleria", Galleria);
+	app.component("Knob", Knob);
+	app.component("Listbox", Listbox);
+	app.component("MegaMenu", MegaMenu);
+	app.component("Menu", Menu);
+	app.component("Menubar", Menubar);
+	app.component("Message", Message);
+	app.component("MultiSelect", MultiSelect);
+	app.component("OrderList", OrderList);
+	app.component("OrganizationChart", OrganizationChart);
+	app.component("OverlayPanel", OverlayPanel);
+	app.component("Paginator", Paginator);
+	app.component("Panel", Panel);
+	app.component("PanelMenu", PanelMenu);
+	app.component("Password", Password);
+	app.component("PickList", PickList);
+	app.component("ProgressBar", ProgressBar);
+	app.component("RadioButton", RadioButton);
+	app.component("Rating", Rating);
+	app.component("SelectButton", SelectButton);
+	app.component("ScrollPanel", ScrollPanel);
+	app.component("ScrollTop", ScrollTop);
+	app.component("Slider", Slider);
+	app.component("Sidebar", Sidebar);
+	app.component("Skeleton", Skeleton);
+	app.component("SplitButton", SplitButton);
+	app.component("Splitter", Splitter);
+	app.component("SplitterPanel", SplitterPanel);
+	app.component("Steps", Steps);
+	app.component("TabMenu", TabMenu);
+	app.component("TabView", TabView);
+	app.component("TabPanel", TabPanel);
+	app.component("Tag", Tag);
+	app.component("Textarea", Textarea);
+	app.component("TieredMenu", TieredMenu);
+	app.component("Timeline", Timeline);
+	app.component("Toast", Toast);
+	app.component("Toolbar", Toolbar);
+	app.component("ToggleButton", ToggleButton);
+	app.component("Tree", Tree);
+	app.component("TreeSelect", TreeSelect);
+	app.component("TreeTable", TreeTable);
+	app.component("TriStateCheckbox", TriStateCheckbox);
+	app.component("Editor", Editor);
 
-  app.component("BlockViewer", BlockViewer);
-  app.component("Image", Image);
+	app.component("Image", Image);
 
-  return {
-    provide: {
-      appState: reactive({
-        theme: "lara-light-indigo",
-        darkTheme: false,
-      }) as AppState,
-    },
-  };
+	return {
+		provide: {
+			appState: reactive({
+				theme: "lara-light-indigo",
+				darkTheme: false,
+			}) as AppState,
+		},
+	};
 });
 
 declare module "#app" {
-  interface NuxtApp {
-    $appState: AppState;
-  }
+	interface NuxtApp {
+		$appState: AppState;
+	}
 }
 
 declare module "@vue/runtime-core" {
-  interface ComponentCustomProperties {
-    $appState: AppState;
-  }
+	interface ComponentCustomProperties {
+		$appState: AppState;
+	}
 }
 
 export {};
