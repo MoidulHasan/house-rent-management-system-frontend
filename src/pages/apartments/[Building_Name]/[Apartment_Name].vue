@@ -17,7 +17,7 @@
 		<div class="mt-2">
 			<CommonMetaData
 				:data-key="'Descriptions '"
-				:value="ApartmentData.Descriptions"
+				:value="ApartmentData?.Descriptions"
 			/>
 		</div>
 
@@ -50,6 +50,10 @@
 				/>
 			</CommonMetaData>
 		</div>
+	</div>
+
+	<div class="card">
+		<BillTable :apartment-data="ApartmentData" />
 	</div>
 </template>
 
