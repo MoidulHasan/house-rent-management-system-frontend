@@ -56,30 +56,16 @@ export default class AuthService {
 		const authStore = useAuthStore();
 
 		try {
-			const res = await $fetch("api/auth/logout", {
-				method: "POST",
-				headers: {
-					Authorization: `Bearer ${authStore.token}`,
-				},
-			});
+			const token = useCookie(TOKEN_NAME);
+			const userCookie = useCookie("logged_user");
 
-			if (res.success) {
-				const token = useCookie(TOKEN_NAME);
-				const userCookie = useCookie("logged_user");
+			token.value = "";
+			userCookie.value = "";
 
-				token.value = "";
-				userCookie.value = "";
-
-				return {
-					status: true,
-					message: res.message,
-				};
-			} else {
-				return {
-					status: false,
-					message: res.message,
-				};
-			}
+			return {
+				status: true,
+				message: "Logout Success",
+			};
 		} catch (err) {
 			return {
 				status: false,
