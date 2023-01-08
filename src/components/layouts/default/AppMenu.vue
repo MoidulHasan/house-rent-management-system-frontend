@@ -1,6 +1,6 @@
 <template>
 	<div class="layout-menu-container">
-		<NuxtLink to="/" class="layout-sidebar-logo">
+		<NuxtLink to="/admin/" class="layout-sidebar-logo">
 			<img
 				alt="House Rent Management System"
 				:src="'/images/logos/House-Rent-Management-System.png'"

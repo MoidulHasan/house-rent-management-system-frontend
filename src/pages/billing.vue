@@ -1,12 +1,12 @@
 <template>
-	<div>Dashboard</div>
+	<div class="mt-5"></div>
 </template>
 
 <script setup lang="ts">
 	// define page meta
 	definePageMeta({
-		title: "Dashboard",
-		middleware: ["auth"],
+		title: "Bills",
+		// middleware: ["auth"],
 		layout: "userpanel",
 	});
 </script>

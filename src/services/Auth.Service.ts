@@ -28,16 +28,7 @@ export default class AuthService {
 				token.value = res.token;
 				userCookie.value = res.data.user;
 
-				return {
-					status: true,
-					message: res.message,
-				};
-				// } else {
-				// 	return {
-				// 		status: false,
-				// 		message: "You don't have access to login to this panel",
-				// 	};
-				// }
+				return res;
 			} else {
 				return {
 					status: false,

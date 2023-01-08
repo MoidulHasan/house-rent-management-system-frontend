@@ -24,86 +24,6 @@
 					</div>
 
 					<div class="w-full md:w-10 mx-auto">
-						<!-- <Form
-							:initial-values="initialValues"
-							:validation-schema="rules"
-							@submit="loginFormSubmit"
-						>
-							<Field
-								name="email"
-								v-slot="{ field, errorMessage }"
-							>
-								<label
-									for="email"
-									class="block text-900 text-xl font-medium mb-2"
-									>Email Address</label
-								>
-								<InputText
-									v-bind="field"
-									aria-describedby="email"
-									:class="[
-										'w-full mb-3',
-										{ 'p-invalid': errorMessage },
-									]"
-									placeholder="Email Address"
-									style="padding: 1rem"
-								/>
-								<small id="email" class="p-error">{{
-									errorMessage
-								}}</small>
-							</Field>
-
-							<Field
-								name="password"
-								v-slot="{ field, errorMessage }"
-							>
-								<label
-									for="password"
-									class="block text-900 text-xl font-medium mb-2"
-									>Password</label
-								>
-								<Password
-									:modelValue="password"
-									aria-describedby="password"
-									:toggle-mask="true"
-									class="w-full mb-3"
-									input-class="w-full"
-									placeholder="Password"
-									input-style="padding:1rem"
-								/>
-								<small id="password" class="p-error">{{
-									errorMessage
-								}}</small>
-							</Field>
-
-							<div
-								class="flex align-items-center justify-content-between mb-5"
-							>
-								<div class="flex align-items-center">
-									<Checkbox
-										id="rememberme1"
-										v-model="checked"
-										:binary="true"
-										class="mr-2"
-									/>
-									<label for="rememberme1"
-										>Remember me</label
-									>
-								</div>
-								<a
-									class="font-medium no-underline ml-2 text-right cursor-pointer"
-									style="color: var(--primary-color)"
-									>Forgot password?</a
-								>
-							</div>
-							<Button
-								label="Sign In"
-								type="submit"
-								class="w-full p-3 text-xl"
-							/>
-						</Form>
-					 -->
-
 						<div class="grid">
 							<div class="col-12">
 								<label
@@ -242,7 +162,12 @@
 					life: 3000,
 				});
 
-				router.push("/");
+				console.log(response);
+
+				if (response?.data?.user?.role === "Renter")
+					router.push("/");
+				else if (response?.data?.user?.role === "Admin")
+					router.push("/admin/");
 			} else {
 				toast.add({
 					severity: "error",

@@ -35,7 +35,7 @@
 				<template #body="slotProps">
 					<a
 						:href="
-							'/apartments/' +
+							'/admin/apartments/' +
 							slotProps?.data?.Building_Name +
 							'/' +
 							slotProps?.data?.Unit_Name

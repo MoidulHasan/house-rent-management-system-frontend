@@ -22,7 +22,11 @@
 				</svg>
 			</Button>
 
-			<NuxtLink v-show="menuClick" to="/" class="layout-topbar-logo">
+			<NuxtLink
+				v-show="menuClick"
+				to="/admin/"
+				class="layout-topbar-logo"
+			>
 				<img
 					alt="House Rent Management System"
 					:src="'/images/logos/House-Rent-Management-System.png'"
