@@ -6,7 +6,7 @@
 	// define page meta
 	definePageMeta({
 		title: "Bills",
-		// middleware: ["auth"],
+		middleware: ["auth"],
 		layout: "userpanel",
 	});
 </script>

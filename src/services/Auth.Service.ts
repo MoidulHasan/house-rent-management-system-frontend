@@ -14,27 +14,20 @@ export default class AuthService {
 		const userCookie = useCookie("logged_user");
 
 		try {
-			const res = await Fetch.postData(
+			const response = await Fetch.postData(
 				this.apiUrl + "/login",
 				formData
 			);
 
-			if (res.status) {
-				console.log(res);
-				// if (res.data.user.type === "maintainer") {
-				authStore.setUser(res.data.user);
-				authStore.setToken(res.token);
+			if (response.status === "success") {
+				authStore.setUser(response.data.user);
+				authStore.setToken(response.token);
 
-				token.value = res.token;
-				userCookie.value = res.data.user;
-
-				return res;
-			} else {
-				return {
-					status: false,
-					message: res.message,
-				};
+				token.value = response.token;
+				userCookie.value = response.data.user;
 			}
+
+			return response;
 		} catch (err) {
 			return {
 				status: false,
@@ -63,5 +56,10 @@ export default class AuthService {
 				message: "Logout failed, error- " + err,
 			};
 		}
+	}
+
+	async Signup(data) {
+		const response = await Fetch.postData(this.apiUrl + "/signup", data);
+		return response;
 	}
 }

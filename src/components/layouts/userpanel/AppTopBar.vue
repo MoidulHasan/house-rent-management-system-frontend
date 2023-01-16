@@ -12,20 +12,9 @@
 				</template>
 				<template #end>
 					<ul
+						v-if="authStore.authenticated"
 						class="layout-topbar-menu hidden lg:flex origin-top"
 					>
-						<li>
-							<button class="p-link layout-topbar-button">
-								<i class="pi pi-calendar" />
-								<span>Events</span>
-							</button>
-						</li>
-						<li>
-							<button class="p-link layout-topbar-button">
-								<i class="pi pi-cog" />
-								<span>Settings</span>
-							</button>
-						</li>
 						<li>
 							<button
 								class="p-link layout-topbar-button"
@@ -44,6 +33,18 @@
 							/>
 						</li>
 					</ul>
+					<ul v-else>
+						<Button
+							label="Login"
+							class="p-button p-button-outlined mr-3"
+							@click="toggleLoginDialog"
+						/>
+						<Button
+							label="Sign up"
+							class="p-button-raised"
+							@click="toggleSignUpDialog"
+						/>
+					</ul>
 				</template>
 			</Menubar>
 		</div>
@@ -54,6 +55,16 @@
 				style="height: 0.25em"
 			/>
 		</div>
+
+		<UserSignup
+			:show-dialog="showSignUp"
+			@hide-dialog="toggleSignUpDialog"
+		/>
+
+		<UserLogin
+			:show-dialog="showLogin"
+			@hide-dialog="toggleLoginDialog"
+		/>
 	</div>
 </template>
 
@@ -73,18 +84,31 @@
 	const router = useRouter();
 
 	// Define States
+	const showSignUp = ref(false);
+	const showLogin = ref(false);
 	const menuClick = ref(false);
 	const menu = ref();
-	const menuItems = ref([
-		{
-			label: "Dashboard",
-			to: "/",
-		},
-		{
-			label: "Billing",
-			to: "/billing",
-		},
-	]);
+	const menuItems = computed(() => {
+		if (authStore.authenticated) {
+			return [
+				{
+					label: "Rent",
+					to: "/rent",
+				},
+				{
+					label: "Billing",
+					to: "/billing",
+				},
+			];
+		} else {
+			return [
+				{
+					label: "Rent",
+					to: "/rent",
+				},
+			];
+		}
+	});
 
 	const items = ref([
 		{
@@ -102,7 +126,7 @@
 					});
 					authStore.setToken("");
 					authStore.setUser({});
-					router.push("/login");
+					router.push("/");
 				} else {
 					toast.add({
 						severity: "error",
@@ -126,6 +150,14 @@
 
 	const toggle = (event) => {
 		menu.value.toggle(event);
+	};
+
+	const toggleSignUpDialog = () => {
+		showSignUp.value = !showSignUp.value;
+	};
+
+	const toggleLoginDialog = () => {
+		showLogin.value = !showLogin.value;
 	};
 </script>
 

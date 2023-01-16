@@ -112,10 +112,10 @@
 </template>
 
 <script lang="ts" setup>
-	import { useAuthStore } from "../stores/auth.store.js";
 	import { useToast } from "primevue/usetoast";
 	import Toast from "primevue/toast";
 	import AuthService from "~/services/Auth.Service";
+	import { useAuthStore } from "~~/src/stores/auth.store";
 
 	definePageMeta({
 		layout: "empty",
@@ -152,17 +152,13 @@
 			};
 			const response = await new AuthService().Login(values);
 
-			console.log(response);
-
-			if (response.status) {
+			if (response.status === "success") {
 				toast.add({
 					severity: "success",
 					summary: "Success",
 					detail: response.message,
 					life: 3000,
 				});
-
-				console.log(response);
 
 				if (response?.data?.user?.role === "Renter")
 					router.push("/");
