@@ -161,6 +161,24 @@
 				</small>
 			</div>
 
+			<div class="field">
+				<label for="Abailable_From" class="mb-3">
+					Abailable From
+				</label>
+				<Calendar
+					id="Abailable_From"
+					v-model="apartmentData.Abailable_From"
+					required="true"
+					:minDate="new Date()"
+				/>
+				<small
+					class="p-error"
+					v-if="submitted && !apartmentData.Abailable_From"
+				>
+					Apartment Availabale Date Required.
+				</small>
+			</div>
+
 			<div class="formgrid grid">
 				<div class="field col">
 					<label for="price">Rent Charge</label>
@@ -238,6 +256,7 @@
 		Status: "Unoccupied",
 		Rent_Charge: null,
 		Number_of_room: null,
+		Abailable_From: null,
 	});
 	const buildingNames = ref([]);
 
@@ -262,6 +281,17 @@
 	const saveApartment = async () => {
 		submitted.value = true;
 
+		if (
+			!apartmentData.value.Unit_Name ||
+			!apartmentData.value.Building_Name ||
+			!apartmentData.value.Status ||
+			!apartmentData.value.Rent_Charge ||
+			!apartmentData.value.Number_of_room ||
+			!apartmentData.value.Abailable_From
+		) {
+			return;
+		}
+
 		const response = await Appartment.Create(apartmentData.value);
 
 		if (response.status === "success") {
@@ -275,6 +305,7 @@
 				Status: null,
 				Rent_Charge: null,
 				Number_of_room: null,
+				Abailable_From: null,
 			};
 			toast.add({
 				severity: "success",

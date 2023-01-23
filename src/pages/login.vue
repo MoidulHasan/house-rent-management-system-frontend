@@ -35,15 +35,15 @@
 								<InputText
 									v-model="email"
 									aria-describedby="email"
-									:class="[
-										'w-full mb-3',
-										{ 'p-invalid': errorMessage },
-									]"
+									:class="'w-full mb-3'"
 									placeholder="Email Address"
 									style="padding: 1rem"
 								/>
-								<small id="email" class="p-error">
-									{{ errorMessage }}
+								<small
+									class="p-error"
+									v-if="submitted && !email"
+								>
+									Email Address is required.
 								</small>
 							</div>
 
@@ -64,8 +64,11 @@
 									input-style="padding:1rem"
 								/>
 
-								<small id="password" class="p-error">
-									{{ errorMessage }}
+								<small
+									class="p-error"
+									v-if="submitted && !password"
+								>
+									Password is required.
 								</small>
 							</div>
 
@@ -73,28 +76,20 @@
 								<div
 									class="flex align-items-center justify-content-between mb-5"
 								>
-									<div
-										class="flex align-items-center"
-									>
-										<Checkbox
-											id="rememberme1"
-											v-model="checked"
-											:binary="true"
-											class="mr-2"
-										/>
-										<label for="rememberme1"
-											>Remember me</label
+									<div class="text-center mb-5">
+										<span
+											class="text-600 font-medium"
 										>
+											Don't have any account?
+										</span>
+										<span
+											class="text-600 font-medium"
+										>
+											<a :href="'/register'">
+												Register Now!
+											</a>
+										</span>
 									</div>
-									<a
-										class="font-medium no-underline ml-2 text-right cursor-pointer"
-										style="
-											color: var(
-												--primary-color
-											);
-										"
-										>Forgot password?</a
-									>
 								</div>
 								<Button
 									label="Sign In"
@@ -132,6 +127,7 @@
 	const password = ref("");
 	const checked = ref(false);
 	const field = ref("");
+	const submitted = ref(false);
 
 	const initialValues = {
 		email: "antu.khan.988@gmail.com",
@@ -145,6 +141,10 @@
 	});
 
 	const login = async () => {
+		submitted.value = true;
+
+		if (!email.value || !password.value) return;
+
 		try {
 			const values = {
 				email: email.value,
@@ -160,7 +160,10 @@
 					life: 3000,
 				});
 
-				if (response?.data?.user?.role === "Renter")
+				if (
+					response?.data?.user?.role === "Renter" ||
+					response?.data?.user?.role === "Guest"
+				)
 					router.push("/");
 				else if (response?.data?.user?.role === "Admin")
 					router.push("/admin/");
@@ -172,6 +175,8 @@
 					life: 3000,
 				});
 			}
+
+			submitted.value = false;
 		} catch (err) {
 			toast.add({
 				severity: "error",
@@ -179,6 +184,8 @@
 				detail: err,
 				life: 3000,
 			});
+
+			submitted.value = false;
 		}
 	};
 </script>

@@ -1,18 +1,30 @@
 <template>
-	<Card>
-		<template #header>
+	<Card style="min-height: 280px">
+		<!-- <template #header>
 			<img
 				src="https://img.staticmb.com/mbcontent//images/uploads/2021/7/flat-vs-independent-house.jpg"
 				height="300"
 			/>
-		</template>
+		</template> -->
 		<template #title>
 			{{ apartment.Building_Name + " - " + apartment.Unit_Name }}
 		</template>
 		<template #subtitle>
-			<span class="text-purpale">{{ apartment.Rent_Charge }}</span>
-			/month
+			<div>
+				<span class="text-purpale">{{
+					apartment.Rent_Charge
+				}}</span>
+				/month
+			</div>
+
+			<div class="">
+				Available From:
+				<span class="text-purpale-sm">
+					{{ formatedDate(apartment.Abailable_From) }}
+				</span>
+			</div>
 		</template>
+
 		<template #content>
 			<div>
 				<p>
@@ -74,6 +86,8 @@
 	import { useToast } from "primevue/usetoast";
 
 	import Application from "~/services/Application.Service";
+	import { Apartment } from "~~/constants/Types";
+	import { formatedDate } from "~~/src/utils";
 
 	const authStore = useAuthStore();
 	const toast = useToast();
@@ -81,15 +95,14 @@
 	const applicationId = ref(null);
 
 	const props = defineProps<{
-		apartment: object;
+		apartment: Apartment;
 	}>();
 
 	// states
 	const isApplied = computed(() => {
 		if (authStore.user) {
-			const hasApplication = authStore.user.applications?.filter(
-				(application) =>
-					application.apartment_id === props.apartment._id
+			const hasApplication = props.apartment.applications.filter(
+				(application) => application.user_id == authStore.user._id
 			);
 
 			if (hasApplication?.length) {
@@ -105,12 +118,23 @@
 
 	const handleApply = async () => {
 		if (!authStore.authenticated) {
-			location.replace("/login");
+			toast.add({
+				severity: "warn",
+				summary: "Login First",
+				detail: "You are not logedin, please login first.",
+				life: 3000,
+			});
+
+			setTimeout(() => {
+				location.replace("/login");
+			}, 3000);
+
+			return;
 		}
 
 		const applicationData = {
-			apartment_id: props.apartment._id,
-			user_id: authStore.user._id,
+			apartment: props.apartment._id,
+			user: authStore.user._id,
 		};
 
 		const response = await Application.Create(applicationData);
@@ -127,6 +151,8 @@
 				detail: "Successfully Applied",
 				life: 3000,
 			});
+
+			window.location.reload(true);
 		} else {
 			toast.add({
 				severity: "error",

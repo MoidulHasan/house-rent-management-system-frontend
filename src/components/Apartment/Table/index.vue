@@ -54,7 +54,8 @@
 				<template #body="slotProps">
 					<a
 						:href="
-							'building/' + slotProps?.data?.Building_Name
+							'/admin/building/' +
+							slotProps?.data?.Building_Name
 						"
 						>{{ slotProps?.data?.Building_Name }}</a
 					>

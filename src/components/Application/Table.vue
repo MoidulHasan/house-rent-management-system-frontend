@@ -33,60 +33,48 @@
 				</div>
 			</template>
 
-			<Column
-				field="Building Name"
-				header="Name"
-				style="max-width: 10%"
-			>
+			<Column header="Building Name" style="max-width: 10%">
 				<template #body="slotProps">
 					<a
 						:href="
 							'/admin/building/' +
-							slotProps?.data?.apartment.Building_Name
+							slotProps?.data?.apartment?.Building_Name
 						"
 					>
-						{{ slotProps?.data?.apartment.Building_Name }}
+						{{ slotProps?.data?.apartment?.Building_Name }}
 					</a>
 				</template>
 			</Column>
 
-			<Column
-				field="Apartment Name"
-				header="Name"
-				style="max-width: 10%"
-			>
+			<Column header="Apartment Name" style="max-width: 10%">
 				<template #body="slotProps">
 					<a
 						:href="
 							'/admin/apartments/' +
-							slotProps?.data?.apartment.Unit_Name
+							slotProps?.data?.apartment?.Unit_Name
 						"
 					>
-						{{ slotProps?.data?.apartment.Unit_Name }}
+						{{ slotProps?.data?.apartment?.Unit_Name }}
 					</a>
 				</template>
 			</Column>
 
-			<Column
-				field="Applicant Name"
-				header="Name"
-				style="max-width: 10%"
-			>
+			<Column header="Applicant Name" style="max-width: 10%">
 				<template #body="slotProps">
-					<a :href="'/admin/users/' + slotProps?.data?.user._id">
-						{{ slotProps?.data?.user.name }}
+					<a
+						:href="
+							'/admin/users/' + slotProps?.data?.user?._id
+						"
+					>
+						{{ slotProps?.data?.user?.name }}
 					</a>
 				</template>
 			</Column>
 
-			<Column
-				field="Applicant Email"
-				header="Name"
-				style="max-width: 10%"
-			>
+			<Column header="Applicant Email" style="max-width: 10%">
 				<template #body="slotProps">
 					<p>
-						{{ slotProps?.data?.user.email }}
+						{{ slotProps?.data?.user?.email }}
 					</p>
 				</template>
 			</Column>
@@ -122,12 +110,20 @@
 					<Button
 						icon="pi pi-check"
 						class="p-button-rounded p-button-success mr-2"
-						@click="acceptApplication(slotProps.data._id)"
+						@click="acceptApplication(slotProps.data?._id)"
+						:disabled="
+							slotProps.data.application_status !==
+							'Pending'
+						"
 					/>
 					<Button
 						icon="pi pi-trash"
 						class="p-button-rounded p-button-danger text-white"
-						@click="rejectApplication(slotProps.data._id)"
+						@click="rejectApplication(slotProps.data?._id)"
+						:disabled="
+							slotProps.data.application_status !==
+							'Pending'
+						"
 					/>
 				</template>
 			</Column>

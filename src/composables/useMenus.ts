@@ -23,6 +23,11 @@ export const useMenus = () => {
 					icon: "pi pi-user",
 					to: "/admin/renters",
 				},
+				{
+					label: "Rental Application",
+					icon: "pi pi-file",
+					to: "/admin/applications",
+				},
 			],
 		},
 	];

@@ -1,18 +1,29 @@
-export interface ModelTestSchedule {
-  id: number;
-  model_test_id: number;
-  start_at: string;
-  end_at: string;
-  created_at: string;
-  updated_at: string;
-  rescheduled: boolean;
+export interface User {
+	role: string;
+	active: boolean;
+	_id: string;
+	name: string;
+	email: string;
 }
 
-export interface ModelTestSubject {
-  id: number;
-  name: string;
-  pivot: {
-    subject_id: number;
-    model_test_id: number;
-  };
+export interface Apartment {
+	_id: string;
+	Unit_Name: string;
+	Descriptions: string;
+	Building_Name: string;
+	Category: string;
+	Status: string;
+	Rent_Charge: number;
+	Number_of_room: number;
+	Abailable_From: string;
+	Billing: [];
+	applications: [];
+}
+
+export interface Application {
+	_id: string;
+	application_date: string;
+	application_status: string;
+	apartment: Apartment;
+	user: User;
 }

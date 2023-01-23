@@ -96,8 +96,8 @@
 					to: "/rent",
 				},
 				{
-					label: "Billing",
-					to: "/billing",
+					label: "Dashboard",
+					to: "/dashboard",
 				},
 			];
 		} else {

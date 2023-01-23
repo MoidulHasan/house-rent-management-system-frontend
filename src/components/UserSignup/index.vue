@@ -3,7 +3,7 @@
 		<Dialog
 			:visible="showDialog"
 			:style="{ width: '450px' }"
-			header="Create Renter"
+			header="Create Account"
 			:modal="true"
 			class="p-fluid"
 			:closable="false"
