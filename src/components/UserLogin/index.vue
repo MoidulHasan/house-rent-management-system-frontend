@@ -109,7 +109,10 @@
 					life: 3000,
 				});
 
-				if (response.data.user.role === "Renter") {
+				if (
+					response.data.user.role === "Renter" ||
+					response.data.user.role === "Guest"
+				) {
 					location.reload();
 				} else {
 					location.replace("/admin");
