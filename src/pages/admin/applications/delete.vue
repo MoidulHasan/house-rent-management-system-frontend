@@ -37,6 +37,7 @@
 <script setup lang="ts">
 	import Apartment from "~/services/Appartment.Service";
 	import { useToast } from "primevue/usetoast";
+	import ApplicationService from "~~/src/services/Application.Service";
 
 	// define hooks
 	const toast = useToast();
@@ -58,6 +59,7 @@
 
 	const handleConfirm = async () => {
 		const response = await Apartment.Delete(props.applicationId);
+		ApplicationService.Cancel();
 
 		if (response.status === "success") {
 			toast.add({
