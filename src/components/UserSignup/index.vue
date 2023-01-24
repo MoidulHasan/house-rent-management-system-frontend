@@ -110,8 +110,6 @@
 </template>
 
 <script setup lang="ts">
-	import Appartment from "~/services/Appartment.Service";
-	import Building from "~/services/Building.Service";
 	import { useToast } from "primevue/usetoast";
 	import AuthService from "~~/src/services/Auth.Service";
 
