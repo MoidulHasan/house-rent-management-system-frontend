@@ -69,7 +69,7 @@
 			<Column
 				field="Descriptions"
 				header="Descriptions"
-				style="max-width: 15%"
+				style="width: 20%"
 			/>
 
 			<Column
@@ -90,11 +90,7 @@
 				style="max-width: 10%"
 			/>
 
-			<Column
-				:exportable="false"
-				style="max-width: 20%"
-				header="Action"
-			>
+			<Column :exportable="false" style="width: 20%" header="Action">
 				<template #body="slotProps">
 					<Button
 						icon="pi pi-eye"
