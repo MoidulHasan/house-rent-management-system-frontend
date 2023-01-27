@@ -33,8 +33,8 @@
 
 			<Column field="Name" header="Name" style="max-width: 10%">
 				<template #body="slotProps">
-					<a :href="'renters/' + slotProps?.data?._id">
-						{{ slotProps?.data?.Name }}
+					<a :href="'renters/' + slotProps?.data?.User._id">
+						{{ slotProps?.data?.User.name }}
 					</a>
 				</template>
 			</Column>
@@ -47,9 +47,14 @@
 				<template #body="slotProps">
 					<a
 						:href="
-							'building/' + slotProps?.data?.Building_Name
+							'building/' +
+							slotProps?.data?.Apartment.Building
+								.Building_Name
 						"
-						>{{ slotProps?.data?.Building_Name }}</a
+						>{{
+							slotProps?.data?.Apartment.Building
+								.Building_Name
+						}}</a
 					>
 				</template>
 			</Column>
@@ -63,12 +68,13 @@
 					<a
 						:href="
 							'/admin/apartments/' +
-							slotProps?.data?.Building_Name +
+							slotProps?.data?.Apartment.Building
+								.Building_Name +
 							'/' +
-							slotProps?.data?.Apartment_Name
+							slotProps?.data?.Apartment.Apartment_Name
 						"
 					>
-						{{ slotProps?.data?.Apartment_Name }}
+						{{ slotProps?.data?.Apartment.Unit_Name }}
 					</a>
 				</template>
 			</Column>
@@ -77,33 +83,21 @@
 				field="Phone"
 				header="Phone Number"
 				style="max-width: 10%"
-			/>
-
-			<Column
-				field="Rent_Start_Date"
-				header="Rent Start Date"
-				style="max-width: 10%"
 			>
 				<template #body="slotProps">
-					{{
-						slotProps.data.Rent_Start_Date
-							? formatedStartDate(
-									slotProps.data.Rent_Start_Date
-							  )
-							: "N/A"
-					}}
+					{{ slotProps?.data?.User.email }}
 				</template>
 			</Column>
 
-			<Column field="NID" header="NID Number" style="width: 10%" />
+			<!-- <Column field="NID" header="NID Number" style="width: 10%" /> -->
 
-			<Column
+			<!-- <Column
 				field="Permanent_Address"
 				header="Permanent_Address"
 				style="width: 10%"
-			/>
+			/> -->
 
-			<Column field="Status" header="Status" style="width: 10%" />
+			<!-- <Column field="Status" header="Status" style="width: 10%" /> -->
 
 			<Column
 				:exportable="false"

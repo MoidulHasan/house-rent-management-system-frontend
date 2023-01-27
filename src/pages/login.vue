@@ -62,6 +62,7 @@
 									input-class="w-full"
 									placeholder="Password"
 									input-style="padding:1rem"
+									@keyup.enter="handleSubmit"
 								/>
 
 								<small
@@ -131,7 +132,7 @@
 
 	const initialValues = {
 		email: "antu.khan.988@gmail.com",
-		password: "Password@988",
+		password: "test1234",
 	};
 
 	// methods

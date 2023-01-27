@@ -58,7 +58,10 @@
 
 			<ApartmentAdd
 				:show-dialog="showAddDialog"
-				:building-name="route.params.Building_Name"
+				:building="{
+					name: Building_Data?.Building_Name,
+					id: Building_Data?._id,
+				}"
 				@hide-dialog="hideDialogAdd"
 			/>
 
@@ -155,9 +158,11 @@
 	const fetchData = async () => {
 		const res = await Appartment.fetchAll();
 
+		console.log(Building_Data.value._id);
+
 		if (res.status === "success") {
 			AppartmentData.value = res.data.data.filter(
-				(data) => data.Building_Name === route.params.Building_Name
+				(data) => data.Building._id === Building_Data.value._id
 			);
 		}
 	};

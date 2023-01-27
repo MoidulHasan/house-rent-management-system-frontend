@@ -6,47 +6,41 @@
 			<div>
 				<h3 class="flex">
 					<span>Name : </span>
-					<span> {{ renterData?.Name }}</span>
+					<span> {{ renterData?.User.name }}</span>
 				</h3>
 			</div>
 
 			<div class="flex">
 				<CommonMetaData
 					:data-key="'Building Name'"
-					:value="renterData?.Building_Name"
+					:value="renterData?.Apartment.Building.Building_Name"
 				/>
 
 				<CommonMetaData
 					class="ml-3"
 					:data-key="'Apartment Name'"
-					:value="renterData?.Apartment_Name"
-				/>
-
-				<CommonMetaData
-					class="ml-3"
-					:data-key="'Rent Start Date'"
-					:value="formatedStartDate(renterData?.Rent_Start_Date)"
+					:value="renterData?.Apartment.Unit_Name"
 				/>
 			</div>
 
 			<div class="flex mt-2">
 				<CommonMetaData
-					:data-key="'Phone Number '"
-					:value="renterData?.Phone"
+					:data-key="'Email Address'"
+					:value="renterData?.User.email"
 				/>
 
-				<CommonMetaData
+				<!-- <CommonMetaData
 					class="ml-3"
 					:data-key="'NID Number '"
 					:value="renterData?.NID"
-				/>
+				/> -->
 			</div>
 
 			<div class="mt-3">
-				<CommonMetaData
+				<!-- <CommonMetaData
 					:data-key="'Permanent Address '"
 					:value="renterData?.Permanent_Address"
-				/>
+				/> -->
 			</div>
 		</div>
 	</div>
@@ -88,14 +82,16 @@
 
 	// methods
 	const fetchRenterData = async () => {
-		const res = await Renter.fetchAll();
+		const response = await Renter.fetchAll();
+		console.log(response);
 
-		if (res.status === "success") {
-			renterData.value = res.data.data.filter(
-				(data) => data._id === route.params.Renter_Id
+		if (response.status === "success") {
+			renterData.value = response.data.data.filter(
+				(data) => data.User._id === route.params.Renter_Id
 			)[0];
 
-			breadCrumbItems.value.item.item.label = renterData.value.Name;
+			breadCrumbItems.value.item.item.label =
+				renterData.value?.User?.name;
 		}
 	};
 

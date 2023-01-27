@@ -1,7 +1,12 @@
 <template>
-	<div></div>
+	<div>this is admin dashboard</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	definePageMeta({
+		layout: "userpanel",
+		middleware: "auth",
+	});
+</script>
 
 <style scoped></style>

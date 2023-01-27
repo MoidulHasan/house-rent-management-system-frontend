@@ -28,6 +28,7 @@
 					v-model="userData.password"
 					:required="true"
 					toggleMask
+					@keyup.enter="handleSubmit"
 				/>
 				<small
 					class="p-error"

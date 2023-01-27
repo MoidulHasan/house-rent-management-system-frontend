@@ -38,10 +38,14 @@
 					<a
 						:href="
 							'/admin/building/' +
-							slotProps?.data?.apartment?.Building_Name
+							slotProps?.data?.apartment?.Building
+								.Building_Name
 						"
 					>
-						{{ slotProps?.data?.apartment?.Building_Name }}
+						{{
+							slotProps?.data?.apartment?.Building
+								.Building_Name
+						}}
 					</a>
 				</template>
 			</Column>

@@ -99,12 +99,16 @@
 	const fetchData = async () => {
 		const response = await Appartment.fetchAll();
 
+		console.log(response);
+
 		if (response.status === "success") {
 			ApartmentData.value = response.data.data.filter(
 				(data) =>
-					data.Building_Name === route.params.Building_Name &&
+					data.Building.Building_Name ===
+						route.params.Building_Name &&
 					data.Unit_Name === route.params.Apartment_Name
 			)[0];
+			console.log(ApartmentData.value);
 		}
 	};
 </script>

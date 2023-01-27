@@ -48,7 +48,9 @@
 		const response = await RentService.fetchAll();
 
 		if (response.status === "success") {
-			apartments.value = response.data.data;
+			apartments.value = response.data.data.filter(
+				(apartment) => apartment.Status !== "Occupied"
+			);
 		} else {
 			apartments.value = [];
 		}

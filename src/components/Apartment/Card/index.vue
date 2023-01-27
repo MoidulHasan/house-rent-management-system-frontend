@@ -1,11 +1,11 @@
 <template>
 	<Card style="min-height: 280px">
-		<!-- <template #header>
+		<template #header>
 			<img
 				src="https://img.staticmb.com/mbcontent//images/uploads/2021/7/flat-vs-independent-house.jpg"
 				height="300"
 			/>
-		</template> -->
+		</template>
 		<template #title>
 			{{ apartment.Building_Name + " - " + apartment.Unit_Name }}
 		</template>
@@ -55,27 +55,47 @@
 			</div>
 		</template>
 		<template #footer>
-			<div class="flex justify-content-end">
-				<Button
-					v-if="isApplied"
-					icon="pi pi-times"
-					label="Cancle"
-					class="mr-2 p-button-danger"
-					@click="handleDelete"
-				/>
-				<Button
-					v-if="isApplied"
-					icon="pi pi-check"
-					label="Applied"
-					disabled
-				/>
+			<div class="flex justify-content-between">
+				<div v-if="isApplied">
+					<Button
+						v-if="applicationStatus === 'Rejected'"
+						class="p-button-danger"
+						:label="applicationStatus"
+						disabled="true"
+						@click.stop
+					/>
+					<Button
+						v-else
+						class="primary"
+						:label="applicationStatus"
+						disabled="true"
+						@click.stop
+					/>
+				</div>
 
-				<Button
-					v-if="!isApplied"
-					icon="pi pi-file-import"
-					label="Apply"
-					@click="handleApply"
-				/>
+				<div>
+					<Button
+						v-if="isApplied"
+						icon="pi pi-times"
+						label="cancel"
+						class="mr-2 p-button-danger"
+						@click="handleDelete"
+						:disabled="applicationStatus === 'Rejected'"
+					/>
+					<Button
+						v-if="isApplied"
+						icon="pi pi-check"
+						label="Applied"
+						disabled
+					/>
+
+					<Button
+						v-if="!isApplied"
+						icon="pi pi-file-import"
+						label="Apply Booking"
+						@click="handleApply"
+					/>
+				</div>
 			</div>
 		</template>
 	</Card>
@@ -93,6 +113,7 @@
 	const toast = useToast();
 
 	const applicationId = ref(null);
+	const applicationStatus = ref();
 
 	const props = defineProps<{
 		apartment: Apartment;
@@ -102,11 +123,13 @@
 	const isApplied = computed(() => {
 		if (authStore.user) {
 			const hasApplication = props.apartment.applications.filter(
-				(application) => application.user_id == authStore.user._id
+				(application) => application.user == authStore.user._id
 			);
 
 			if (hasApplication?.length) {
 				applicationId.value = hasApplication[0]._id;
+				applicationStatus.value =
+					hasApplication[0].application_status;
 				return true;
 			} else {
 				return false;

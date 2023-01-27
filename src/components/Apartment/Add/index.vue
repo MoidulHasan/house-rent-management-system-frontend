@@ -9,7 +9,7 @@
 			:closable="false"
 		>
 			<div class="field">
-				<label for="name">Unit Name</label>
+				<label for="name">Apartment Name</label>
 				<InputText
 					id="name"
 					v-model.trim="apartmentData.Unit_Name"
@@ -96,7 +96,7 @@
 				</label>
 				<Dropdown
 					id="Building_Name"
-					v-model="apartmentData.Building_Name"
+					v-model="apartmentData.Building"
 					:options="buildingNames"
 					optionLabel="label"
 					optionValue="value"
@@ -104,84 +104,67 @@
 				/>
 				<small
 					class="p-error"
-					v-if="submitted && !apartmentData.Building_Name"
+					v-if="submitted && !apartmentData.Building"
 				>
 					Building Name is required.
 				</small>
 			</div>
 
-			<div class="field">
-				<label for="Status" class="mb-3">Status</label>
-				<Dropdown
-					id="Status"
-					v-model="apartmentData.Status"
-					:options="status"
-					optionLabel="label"
-					optionValue="value"
-					placeholder="Select a Status"
-				>
-					<template #value="slotProps">
-						<div
-							v-if="
-								slotProps.value && slotProps.value.value
-							"
-						>
-							<span
-								:class="
-									'product-badge status-' +
+			<div class="grid">
+				<div class="col-6 field">
+					<label for="Status" class="mb-3">Status</label>
+					<Dropdown
+						id="Status"
+						v-model="apartmentData.Status"
+						:options="status"
+						optionLabel="label"
+						optionValue="value"
+						placeholder="Select a Status"
+					>
+						<template #value="slotProps">
+							<div
+								v-if="
+									slotProps.value &&
 									slotProps.value.value
 								"
-								>{{ slotProps.value.label }}</span
 							>
-						</div>
-						<div
-							v-else-if="
-								slotProps.value &&
-								!slotProps.value.value
-							"
-						>
-							<span
-								:class="
-									'product-badge status-' +
-									slotProps.value.toLowerCase()
+								<span
+									:class="
+										'product-badge status-' +
+										slotProps.value.value
+									"
+									>{{ slotProps.value.label }}</span
+								>
+							</div>
+							<div
+								v-else-if="
+									slotProps.value &&
+									!slotProps.value.value
 								"
-								>{{ slotProps.value }}</span
 							>
-						</div>
-						<span v-else>
-							{{ slotProps.placeholder }}
-						</span>
-					</template>
-				</Dropdown>
-				<small
-					class="p-error"
-					v-if="submitted && !apartmentData.Status"
-				>
-					Status is required.
-				</small>
-			</div>
+								<span
+									:class="
+										'product-badge status-' +
+										slotProps.value.toLowerCase()
+									"
+									>{{ slotProps.value }}</span
+								>
+							</div>
+							<span v-else>
+								{{ slotProps.placeholder }}
+							</span>
+						</template>
+					</Dropdown>
+					<small
+						class="p-error"
+						v-if="submitted && !apartmentData.Status"
+					>
+						Status is required.
+					</small>
+				</div>
 
-			<div class="field">
-				<label for="Abailable_From" class="mb-3">
-					Abailable From
-				</label>
-				<Calendar
-					id="Abailable_From"
-					v-model="apartmentData.Abailable_From"
-					required="true"
-					:minDate="new Date()"
-				/>
-				<small
-					class="p-error"
-					v-if="submitted && !apartmentData.Abailable_From"
-				>
-					Apartment Availabale Date Required.
-				</small>
-			</div>
-
-			<div class="formgrid grid">
-				<div class="field col">
-					<label for="price">Rent Charge</label>
+				<div class="col-6 field">
+					<label for="price" class="mb-3">Rent Charge</label>
 					<InputNumber
 						id="price"
 						v-model="apartmentData.Rent_Charge"
@@ -193,8 +176,10 @@
 						Rent Charge is required.
 					</small>
 				</div>
+			</div>
 
-				<div class="field col">
+			<div class="grid">
+				<div class="field col-6">
 					<label for="Number_of_room">Number of room</label>
 					<InputNumber
 						id="Number_of_room"
@@ -206,6 +191,26 @@
 						v-if="submitted && !apartmentData.Number_of_room"
 					>
 						Number of room is required.
+					</small>
+				</div>
+
+				<div class="field col-6">
+					<label for="Number_of_Bathroom"
+						>Number of Bathroom</label
+					>
+					<InputNumber
+						id="Number_of_Bathroom"
+						v-model="apartmentData.Number_of_Bathroom"
+						integeronly
+					/>
+					<small
+						class="p-error"
+						v-if="
+							submitted &&
+							!apartmentData.Number_of_Bathroom
+						"
+					>
+						Number of bathroom room is required.
 					</small>
 				</div>
 			</div>
@@ -236,7 +241,10 @@
 	// define props
 	const props = defineProps<{
 		showDialog: boolean;
-		buildingName?: null | string | string[];
+		building: {
+			name: string;
+			id: string;
+		};
 	}>();
 
 	// define events
@@ -251,12 +259,12 @@
 	const apartmentData = ref({
 		Unit_Name: null,
 		Descriptions: null,
-		Building_Name: null,
+		Building: null,
 		Category: null,
 		Status: "Unoccupied",
 		Rent_Charge: null,
 		Number_of_room: null,
-		Abailable_From: null,
+		Number_of_Bathroom: null,
 	});
 	const buildingNames = ref([]);
 
@@ -283,11 +291,11 @@
 
 		if (
 			!apartmentData.value.Unit_Name ||
-			!apartmentData.value.Building_Name ||
+			!apartmentData.value.Building ||
 			!apartmentData.value.Status ||
 			!apartmentData.value.Rent_Charge ||
 			!apartmentData.value.Number_of_room ||
-			!apartmentData.value.Abailable_From
+			!apartmentData.value.Number_of_Bathroom
 		) {
 			return;
 		}
@@ -300,12 +308,12 @@
 			apartmentData.value = {
 				Unit_Name: null,
 				Descriptions: null,
-				Building_Name: null,
+				Building: null,
 				Category: null,
 				Status: null,
 				Rent_Charge: null,
 				Number_of_room: null,
-				Abailable_From: null,
+				Number_of_Bathroom: null,
 			};
 			toast.add({
 				severity: "success",
@@ -331,37 +339,37 @@
 				? response.data.data.map((building) => {
 						return {
 							label: building.Building_Name,
-							value: building.Building_Name,
+							value: building._id,
 						};
 				  })
 				: null;
 	};
 
 	onMounted(() => {
-		if (props.buildingName) {
+		if (props.building) {
 			buildingNames.value = [
 				{
-					label: props.buildingName,
-					value: props.buildingName,
+					label: props.building.name,
+					value: props.building.id,
 				},
 			];
 
-			apartmentData.value.Building_Name = props.buildingName;
+			apartmentData.value.Building = props.building.id;
 		} else {
 			fetchBuldingNameOptions();
 		}
 	});
 
 	onUpdated(() => {
-		if (props.buildingName) {
+		if (props.building) {
 			buildingNames.value = [
 				{
-					label: props.buildingName,
-					value: props.buildingName,
+					label: props.building.name,
+					value: props.building.id,
 				},
 			];
 
-			apartmentData.value.Building_Name = props.buildingName;
+			apartmentData.value.Building = props.building.id;
 		} else {
 			fetchBuldingNameOptions();
 		}
