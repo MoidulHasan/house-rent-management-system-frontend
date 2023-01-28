@@ -119,10 +119,9 @@
 	const authStore = useAuthStore();
 	const toast = useToast();
 	const router = useRouter();
-	const route = useRoute();
 
 	const applicationId = ref(null);
-	const applicationStatus = ref();
+	const applicationStatus = ref(null);
 
 	const props = defineProps<{
 		apartment: Apartment;

@@ -2,7 +2,7 @@
 	<div class="p-5 flex align-items-center justify-content-center">
 		<DataTable
 			ref="dt"
-			:value="apartmentData?.Bills"
+			:value="billData"
 			dataKey="_id"
 			:paginator="true"
 			:rows="10"
@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 	import AppartmentService from "~~/src/services/Appartment.Service";
+	import { useAuthStore } from "~~/src/stores/auth.store";
 
 	definePageMeta({
 		title: "Bills",
@@ -84,8 +85,11 @@
 	});
 
 	const route = useRoute();
+	const authStore = useAuthStore();
 
 	const apartmentData = ref(null);
+
+	const billData = ref(null);
 
 	const fetchApartmentData = async () => {
 		const response = await AppartmentService.fetchAll();
@@ -93,6 +97,10 @@
 		apartmentData.value = response.data.data.filter(
 			(apartment) => apartment._id === route.params.apartment_id
 		)[0];
+
+		billData.value = apartmentData.value.Bills?.filter(
+			(bill) => bill?.User === authStore.user._id
+		);
 	};
 
 	const calculateTotalBill = (bills) => {
