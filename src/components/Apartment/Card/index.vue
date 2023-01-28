@@ -1,11 +1,11 @@
 <template>
 	<Card style="min-height: 280px">
-		<template #header>
+		<!-- <template #header>
 			<img
 				src="https://img.staticmb.com/mbcontent//images/uploads/2021/7/flat-vs-independent-house.jpg"
 				height="300"
 			/>
-		</template>
+		</template> -->
 		<template #title>
 			{{
 				apartment.Building.Building_Name +
@@ -52,7 +52,10 @@
 			</div>
 		</template>
 		<template #footer>
-			<div class="flex justify-content-between">
+			<div
+				v-if="applicationStatus !== 'Accepted'"
+				class="flex justify-content-between"
+			>
 				<div v-if="isApplied">
 					<Button
 						v-if="applicationStatus === 'Rejected'"
@@ -93,6 +96,13 @@
 						@click="handleApply"
 					/>
 				</div>
+			</div>
+			<div v-else>
+				<Button
+					icon="pi pi-dollar"
+					label="View Bills"
+					@click="handleApply"
+				/>
 			</div>
 		</template>
 	</Card>

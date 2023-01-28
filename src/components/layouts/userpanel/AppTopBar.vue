@@ -92,12 +92,12 @@
 		if (authStore.authenticated) {
 			return [
 				{
-					label: "Dashboard",
-					to: "/dashboard",
-				},
-				{
 					label: "Rent",
 					to: "/rent",
+				},
+				{
+					label: "Apartments",
+					to: "/apartments",
 				},
 			];
 		} else {
