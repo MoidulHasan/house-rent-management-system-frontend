@@ -101,7 +101,7 @@
 				<Button
 					icon="pi pi-dollar"
 					label="View Bills"
-					@click="handleApply"
+					@click="viewBills"
 				/>
 			</div>
 		</template>
@@ -118,6 +118,8 @@
 
 	const authStore = useAuthStore();
 	const toast = useToast();
+	const router = useRouter();
+	const route = useRoute();
 
 	const applicationId = ref(null);
 	const applicationStatus = ref();
@@ -223,6 +225,10 @@
 				life: 3000,
 			});
 		}
+	};
+
+	const viewBills = () => {
+		router.push("/bills/" + props.apartment._id);
 	};
 </script>
 

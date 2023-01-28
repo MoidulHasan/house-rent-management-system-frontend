@@ -77,12 +77,12 @@
 
 			<Column :exportable="false" style="width: 15%" header="Action">
 				<template #body="slotProps">
-					<Button
+					<!-- <Button
 						icon="pi pi-download"
 						class="p-button-rounded p-button-info mr-2"
 						v-tooltip.top="'Download Invoice'"
 						@click="viewData(slotProps.data)"
-					/>
+					/> -->
 					<Button
 						icon="pi pi-pencil"
 						class="p-button-rounded p-button-info mr-2"
