@@ -7,7 +7,11 @@
 			/>
 		</template>
 		<template #title>
-			{{ apartment.Building_Name + " - " + apartment.Unit_Name }}
+			{{
+				apartment.Building.Building_Name +
+				" - " +
+				apartment.Unit_Name
+			}}
 		</template>
 		<template #subtitle>
 			<div>
@@ -15,13 +19,6 @@
 					apartment.Rent_Charge
 				}}</span>
 				/month
-			</div>
-
-			<div class="">
-				Available From:
-				<span class="text-purpale-sm">
-					{{ formatedDate(apartment.Abailable_From) }}
-				</span>
 			</div>
 		</template>
 
@@ -189,7 +186,7 @@
 	const handleDelete = async () => {
 		const response = await Application.Cancel(
 			applicationId.value,
-			authStore.user._id
+			props.apartment._id
 		);
 
 		if (response.status === "success") {
@@ -206,6 +203,8 @@
 				detail: "Successfully Canceled",
 				life: 3000,
 			});
+
+			window.location.reload(true);
 		} else {
 			toast.add({
 				severity: "error",

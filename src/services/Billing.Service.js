@@ -35,16 +35,29 @@ const Delete = async (id) => {
     return response;
 };
 
-const Update = async (id, data) => {
+const Update = async (apartmentId, billId, billData) => {
     const config = useRuntimeConfig();
     const apiUrl = config.public.apiUrl;
 
+
     const response = await new FetchService().putData(
-        apiUrl + "/apartments/" + id, data
+        apiUrl + "/apartments/" + apartmentId + "/bill/" + billId, billData
     );
 
     return response;
 };
 
 
-export default { fetchAll, Create, Delete, Update };
+const acceptPayment = async (apartmentId, billId) => {
+    const config = useRuntimeConfig();
+    const apiUrl = config.public.apiUrl;
+
+    const response = await new FetchService().getData(
+        apiUrl + "/apartments/" + apartmentId + "/bill/accept/" + billId
+    );
+
+    return response;
+}
+
+
+export default { fetchAll, Create, Delete, Update, acceptPayment };

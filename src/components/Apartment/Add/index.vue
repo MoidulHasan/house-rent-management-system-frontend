@@ -241,7 +241,7 @@
 	// define props
 	const props = defineProps<{
 		showDialog: boolean;
-		building: {
+		building?: {
 			name: string;
 			id: string;
 		};

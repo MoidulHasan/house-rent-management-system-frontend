@@ -31,7 +31,7 @@
 				</div>
 			</template>
 
-			<Column field="Unit_Name" header="Unit Name" style="width: 8%">
+			<Column field="Unit_Name" header="Unit Name" style="width: 15%">
 				<template #body="slotProps">
 					<a
 						:href="

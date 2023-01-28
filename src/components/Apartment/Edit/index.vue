@@ -162,24 +162,6 @@
 				</small>
 			</div>
 
-			<div class="field">
-				<label for="Abailable_From" class="mb-3">
-					Abailable From
-				</label>
-				<Calendar
-					id="Abailable_From"
-					v-model="apartmentData.Abailable_From"
-					required="true"
-					:minDate="new Date()"
-				/>
-				<small
-					class="p-error"
-					v-if="submitted && !apartmentData.Abailable_From"
-				>
-					Apartment Availabale Date Required.
-				</small>
-			</div>
-
 			<div class="formgrid grid">
 				<div class="field col">
 					<label for="price">Rent Charge</label>
@@ -243,7 +225,6 @@
 		Status: string;
 		Rent_Charge: number;
 		Number_of_room: number;
-		Abailable_From: string;
 	}
 
 	// define props
@@ -271,7 +252,6 @@
 		Status: "Unoccupied",
 		Rent_Charge: null,
 		Number_of_room: null,
-		Abailable_From: null,
 	});
 	const buildingNames = ref([]);
 
@@ -311,7 +291,6 @@
 				Status: null,
 				Rent_Charge: null,
 				Number_of_room: null,
-				Abailable_From: null,
 			};
 			toast.add({
 				severity: "success",
@@ -367,10 +346,6 @@
 		console.log(props);
 
 		apartmentData.value = props.data;
-
-		apartmentData.value.Abailable_From = new Date(
-			props.data?.Abailable_From
-		);
 
 		if (props.buildingName) {
 			buildingNames.value = [

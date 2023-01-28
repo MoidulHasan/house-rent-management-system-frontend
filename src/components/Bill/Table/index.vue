@@ -2,7 +2,7 @@
 	<div>
 		<DataTable
 			ref="dt"
-			:value="apartmentData?.Billing"
+			:value="apartmentData?.Bills"
 			dataKey="_id"
 			:paginator="true"
 			:rows="10"
@@ -27,35 +27,25 @@
 							@click="createData"
 						/>
 					</h5>
-					<div class="p-input-icon-left">
-						<i class="pi pi-search" />
-						<InputText
-							v-model="filters['global'].value"
-							placeholder="Search..."
-						/>
-					</div>
 				</div>
 			</template>
 
 			<Column
 				field="BillMonthAndYear"
 				header="Month and Year"
-				style="width: 15%"
+				style="width: 10%"
+				:sortable="true"
 			>
 				<template #body="slotProps">
 					{{ convertDate(slotProps?.data?.BillMonthAndYear) }}
 				</template>
 			</Column>
 
-			<Column field="Bills" header="Biller Name" style="width: 10%">
+			<Column field="Bills" header="Biller Name" style="width: 15%">
 				<template #body="slotProps">
-					{{ rentersInfo(slotProps.data.RenterId)?.Name }}
-				</template>
-			</Column>
-
-			<Column field="Bills" header="Biller Phone" style="width: 10%">
-				<template #body="slotProps">
-					{{ rentersInfo(slotProps.data.RenterId)?.Phone }}
+					<a :href="'/admin/users/'">{{
+						apartmentData.renter.User.name
+					}}</a>
 				</template>
 			</Column>
 
@@ -79,45 +69,51 @@
 
 			<Column field="Bills" header="Total Bill" style="width: 10%">
 				<template #body="slotProps">
-					{{ calculateTotalBill(slotProps.data.Bills) }}
+					{{ calculateTotalBill(slotProps.data?.Bills) }}
 				</template>
 			</Column>
 
 			<Column field="Status" header="Status" style="width: 10%" />
 
-			<Column
-				:exportable="false"
-				style="min-width: 20%"
-				header="Action"
-			>
+			<Column :exportable="false" style="width: 15%" header="Action">
 				<template #body="slotProps">
 					<Button
-						icon="pi pi-eye"
-						class="p-button-rounded p-button-success mr-2"
+						icon="pi pi-download"
+						class="p-button-rounded p-button-info mr-2"
+						v-tooltip.top="'Download Invoice'"
 						@click="viewData(slotProps.data)"
 					/>
 					<Button
 						icon="pi pi-pencil"
-						class="p-button-rounded p-button-success mr-2"
-						@click="editRow(slotProps.data)"
+						class="p-button-rounded p-button-info mr-2"
+						v-tooltip.top="'Edit Bill'"
+						:disabled="slotProps.data.Status === 'Paid'"
+						@click="editBill(slotProps.data)"
 					/>
 					<Button
-						icon="pi pi-trash"
-						class="p-button-rounded p-button-danger text-white"
-						@click="deleteRow(slotProps.data)"
+						icon="pi pi-check"
+						class="p-button-rounded p-button-success mr-2"
+						v-tooltip.top="'Accept Payment'"
+						:disabled="slotProps.data.Status === 'Paid'"
+						@click="acceptPayment(slotProps.data._id)"
 					/>
 				</template>
 			</Column>
-
-			<template #empty>
-				<EmptyContent />
-			</template>
 		</DataTable>
+
 		<BillCreate
 			:showDialog="showCreateDialog"
 			:apartmentId="apartmentData?._id"
-			:renterId="RentersData?._id"
+			:rentersData="apartmentData?.renter?.User"
 			@hideDialog="hideCreateDialog"
+		/>
+
+		<BillEdit
+			:show-dialog="showEditDialog"
+			:apartment-id="apartmentData?._id"
+			:renters-data="apartmentData?.renter?.User"
+			:bill-data="billDataToEdit"
+			@hide-dialog="hideEditDialog"
 		/>
 	</div>
 </template>
@@ -127,6 +123,7 @@
 	import Renter from "~/services/Renter.Service";
 	import { FilterMatchMode } from "primevue/api";
 	import { useToast } from "primevue/usetoast";
+	import BillService from "~/services/Billing.Service";
 
 	interface Apartment {
 		_id: string;
@@ -161,14 +158,13 @@
 		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 	});
 	const deleteDialog = ref(false);
-	const RentersData = ref();
 
 	// create bill related states
 	const showCreateDialog = ref(false);
+	const showEditDialog = ref(false);
 
 	// delete single row
-	const rowIdToDelete = ref(null);
-	const deleteRowDialog = ref(false);
+	const billDataToEdit = ref(null);
 
 	// methods
 	// convert month and year
@@ -214,9 +210,20 @@
 		showCreateDialog.value = true;
 	};
 
+	const editBill = (billData) => {
+		billDataToEdit.value = billData;
+
+		showEditDialog.value = true;
+	};
+
+	const hideEditDialog = () => {
+		showEditDialog.value = false;
+		window.location.reload();
+	};
+
 	const hideCreateDialog = () => {
 		showCreateDialog.value = false;
-		fetchRenter();
+		window.location.reload();
 	};
 
 	// redirect to details page
@@ -230,24 +237,31 @@
 		dt.value.exportCSV();
 	};
 
-	const deleteRow = (apartment) => {
-		emits("deleteData", apartment._id);
-	};
+	const acceptPayment = async (billId) => {
+		const response = await BillService.acceptPayment(
+			props.apartmentData._id,
+			billId
+		);
 
-	const editRow = (apartment) => {
-		emits("editData", apartment);
-	};
-
-	const fetchRenter = async () => {
-		const res = await Renter.fetchAll();
-
-		if (res.status === "success") {
-			RentersData.value = res.data.data;
+		if (response.status === "success") {
+			toast.add({
+				severity: "success",
+				summary: "Success",
+				detail: "Payment Accepted",
+				life: 3000,
+			});
+		} else {
+			toast.add({
+				severity: "error",
+				summary: "Failed",
+				detail: response.message,
+				life: 3000,
+			});
 		}
 	};
 
 	onMounted(() => {
-		fetchRenter();
+		console.log(props);
 	});
 
 	onUpdated(() => {

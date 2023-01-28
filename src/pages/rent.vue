@@ -9,7 +9,7 @@
 				<ApartmentCard :apartment="apartmentData" />
 			</div>
 		</div>
-		<div
+		<!-- <div
 			v-else-if="!apartments?.length && typeof apartments === 'object'"
 			:class="'empty-card grid'"
 		>
@@ -27,7 +27,7 @@
 					No Apartment Availabale!!!
 				</h1>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 

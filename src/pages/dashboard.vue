@@ -1,5 +1,5 @@
 <template>
-	<div>this is admin dashboard</div>
+	<div>this is user dashboard</div>
 </template>
 
 <script setup lang="ts">

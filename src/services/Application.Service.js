@@ -13,12 +13,12 @@ const Create = async (data) => {
 };
 
 
-const Cancel = async (application_id, user_id) => {
+const Cancel = async (application_id, apartment_id) => {
     const config = useRuntimeConfig();
     const apiUrl = config.public.apiUrl;
 
     const response = await new FetchService().deleteData(
-        apiUrl + "/application/" + application_id + '?user_id=' + user_id
+        apiUrl + "/application/" + application_id + '?apartment_id=' + apartment_id
     );
 
     return response;

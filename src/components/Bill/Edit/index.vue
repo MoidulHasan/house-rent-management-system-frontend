@@ -16,7 +16,7 @@
 						rentersData.name
 					}}</a>
 				</div>
-				<div class="field col-6">
+				<div class="field col-4">
 					<label for="Month">Bill Month</label>
 					<Dropdown
 						id="Month"
@@ -30,7 +30,7 @@
 					/>
 				</div>
 
-				<div class="field col-6">
+				<div class="field col-4">
 					<label for="Year">Bill Year</label>
 					<InputNumber
 						id="Year"
@@ -40,6 +40,20 @@
 						:min="1000"
 						mode="decimal"
 						:useGrouping="false"
+					/>
+				</div>
+
+				<div class="field col-4">
+					<label for="Status">Bill Status</label>
+					<Dropdown
+						id="Status"
+						v-model="Status"
+						:options="StatusOptions"
+						option-label="label"
+						option-value="value"
+						placeholder="Select Status"
+						required="true"
+						autofocus
 					/>
 				</div>
 			</div>
@@ -69,6 +83,7 @@
 					<Button
 						icon="pi pi-check"
 						class="p-button-text"
+						:disabled="!BillName || !Amount"
 						@click="addBill"
 					/>
 				</div>
@@ -119,6 +134,7 @@
 	const props = defineProps<{
 		apartmentId?: string | null | undefined;
 		rentersData?: object;
+		billData: object;
 		showDialog?: boolean;
 	}>();
 
@@ -134,6 +150,17 @@
 	const Bills = ref([]);
 	const billMonth = ref(null);
 	const billYear = ref(null);
+	const Status = ref(null);
+	const StatusOptions = ref([
+		{
+			label: "Unpaid",
+			value: "Unpaid",
+		},
+		{
+			label: "Paid",
+			value: "Paid",
+		},
+	]);
 	const months = ref([
 		{
 			label: "January",
@@ -226,11 +253,15 @@
 		const BillData = {
 			BillMonthAndYear: billMonth.value + "/" + billYear.value,
 			User: props.rentersData._id,
-			Status: "Unpaid",
+			Status: Status.value,
 			Bills: Bills.value,
 		};
 
-		const response = await Billing.Create(props.apartmentId, BillData);
+		const response = await Billing.Update(
+			props.apartmentId,
+			props.billData._id,
+			BillData
+		);
 
 		if (response.status === "success") {
 			hideDialog();
@@ -238,7 +269,7 @@
 			toast.add({
 				severity: "success",
 				summary: "Success",
-				detail: "Building Add Successful",
+				detail: "Building Edit Successful",
 				life: 3000,
 			});
 		} else {
@@ -250,6 +281,13 @@
 			});
 		}
 	};
+
+	onUpdated(() => {
+		Status.value = props.billData?.Status;
+		Bills.value = props.billData?.Bills;
+		billMonth.value = +props.billData?.BillMonthAndYear.split("/")[0];
+		billYear.value = +props.billData?.BillMonthAndYear.split("/")[1];
+	});
 </script>
 
 <style scoped></style>
