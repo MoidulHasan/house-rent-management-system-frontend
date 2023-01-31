@@ -3,9 +3,7 @@
 		<div
 			class="my-5 flex flex-column align-items-center justify-content-center"
 		>
-			<h1 class="home-title text-primary">
-				Find Best Apartment For You
-			</h1>
+			<h1 class="home-title">Find Best Apartment For You</h1>
 			<p class="home-text" style="margin-top: 22px">
 				Availabale apartments
 			</p>
@@ -81,6 +79,7 @@
 		word-wrap: break-word;
 		box-sizing: border-box;
 		margin: 0;
+		color: blue;
 	}
 
 	.home-text {

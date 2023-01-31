@@ -250,6 +250,7 @@
 				detail: "Payment Accepted",
 				life: 3000,
 			});
+			window.location.reload(true);
 		} else {
 			toast.add({
 				severity: "error",

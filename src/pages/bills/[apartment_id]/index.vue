@@ -1,5 +1,8 @@
 <template>
 	<div class="p-5 flex align-items-center justify-content-center">
+		<h3>Bill List for : {{ apartmentData?.Unit_Name }}</h3>
+	</div>
+	<div class="p-5 flex align-items-center justify-content-center">
 		<DataTable
 			ref="dt"
 			:value="billData"
@@ -23,14 +26,6 @@
 			>
 				<template #body="slotProps">
 					{{ convertDate(slotProps?.data?.BillMonthAndYear) }}
-				</template>
-			</Column>
-
-			<Column field="Bills" header="Biller Name" style="width: 15%">
-				<template #body="slotProps">
-					<a :href="'/admin/users/'">{{
-						apartmentData.renter.User.name
-					}}</a>
 				</template>
 			</Column>
 
@@ -59,17 +54,6 @@
 			</Column>
 
 			<Column field="Status" header="Status" style="width: 10%" />
-
-			<!-- <Column :exportable="false" style="width: 15%" header="Action">
-				<template #body="slotProps">
-					<Button
-						icon="pi pi-download"
-						class="p-button-rounded p-button-info mr-2"
-						v-tooltip.top="'Download Invoice'"
-						@click="viewData(slotProps.data)"
-					/>
-				</template>
-			</Column> -->
 		</DataTable>
 	</div>
 </template>
