@@ -33,7 +33,12 @@
 				</div>
 			</template>
 
-			<Column header="Building Name" style="max-width: 10%">
+			<Column
+				field="apartment.Building.Building_Name"
+				header="Building Name"
+				style="max-width: 10%"
+				:sortable="true"
+			>
 				<template #body="slotProps">
 					<a
 						:href="
@@ -50,7 +55,12 @@
 				</template>
 			</Column>
 
-			<Column header="Apartment Name" style="max-width: 10%">
+			<Column
+				field="apartment.Unit_Name"
+				header="Apartment Name"
+				style="max-width: 10%"
+				:sortable="true"
+			>
 				<template #body="slotProps">
 					<a
 						:href="
@@ -75,13 +85,13 @@
 				</template>
 			</Column>
 
-			<Column header="Applicant Email" style="max-width: 10%">
+			<!-- <Column header="Applicant Email" style="max-width: 10%">
 				<template #body="slotProps">
 					<p>
 						{{ slotProps?.data?.user?.email }}
 					</p>
 				</template>
-			</Column>
+			</Column> -->
 
 			<Column
 				field="application_date"
@@ -131,10 +141,6 @@
 					/>
 				</template>
 			</Column>
-
-			<template #empty>
-				<EmptyContent />
-			</template>
 		</DataTable>
 	</div>
 </template>

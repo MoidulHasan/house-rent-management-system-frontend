@@ -92,19 +92,8 @@
 		if (authStore.authenticated) {
 			return [
 				{
-					label: "Rent",
-					to: "/rent",
-				},
-				{
-					label: "Apartments",
+					label: "My Apartments",
 					to: "/apartments",
-				},
-			];
-		} else {
-			return [
-				{
-					label: "Rent",
-					to: "/rent",
 				},
 			];
 		}

@@ -9,4 +9,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 	const isAdminRoute = to.path.includes("admin");
 
 	if (isAdminRoute && store.user?.role !== "Admin") return navigateTo("/");
+
+	if (!isAdminRoute && store.user.role === "Admin")
+		return navigateTo("/admin");
 });

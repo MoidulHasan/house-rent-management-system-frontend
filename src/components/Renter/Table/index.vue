@@ -122,10 +122,6 @@
 					/>
 				</template>
 			</Column>
-
-			<template #empty>
-				<EmptyContent />
-			</template>
 		</DataTable>
 	</div>
 </template>
